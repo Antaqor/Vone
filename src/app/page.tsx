@@ -34,6 +34,7 @@ interface UserData {
   _id: string;
   username: string;
   profilePicture?: string;
+  coverImage?: string;
   following?: string[];
   location?: string;
   subscriptionExpiresAt?: string;

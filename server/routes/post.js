@@ -81,19 +81,19 @@ router.get("/", async (req, res) => {
 
       await Post.populate(posts, {
         path: "user",
-        select: "username profilePicture location rating",
+        select: "username profilePicture coverImage location rating",
       });
       await Post.populate(posts, {
         path: "comments.user",
-        select: "username profilePicture",
+        select: "username profilePicture coverImage",
       });
       await Post.populate(posts, {
         path: "comments.replies.user",
-        select: "username profilePicture",
+        select: "username profilePicture coverImage",
       });
       await Post.populate(posts, {
         path: "sharedFrom",
-        populate: { path: "user", select: "username profilePicture" },
+        populate: { path: "user", select: "username profilePicture coverImage" },
       });
 
       return res.json(posts);
@@ -102,12 +102,12 @@ router.get("/", async (req, res) => {
     // ---------- 2. Smart sort (engagement + location) ----------
     if (sort === "smart") {
       const posts = await Post.find(filter)
-        .populate("user", "username profilePicture location rating")
-        .populate("comments.user", "username profilePicture")
-        .populate("comments.replies.user", "username profilePicture")
+        .populate("user", "username profilePicture coverImage location rating")
+        .populate("comments.user", "username profilePicture coverImage")
+        .populate("comments.replies.user", "username profilePicture coverImage")
         .populate({
           path: "sharedFrom",
-          populate: { path: "user", select: "username profilePicture" },
+          populate: { path: "user", select: "username profilePicture coverImage" },
         })
         .sort({ createdAt: -1 });
 
@@ -151,14 +151,14 @@ router.get("/", async (req, res) => {
     }
 
     // ---------- 3. Default (chronological) ----------
-    const posts = await Post.find(filter)
-      .populate("user", "username profilePicture")
-      .populate("comments.user", "username profilePicture")
-      .populate("comments.replies.user", "username profilePicture")
-      .populate({
-        path: "sharedFrom",
-        populate: { path: "user", select: "username profilePicture" },
-      })
+      const posts = await Post.find(filter)
+        .populate("user", "username profilePicture coverImage")
+        .populate("comments.user", "username profilePicture coverImage")
+        .populate("comments.replies.user", "username profilePicture coverImage")
+        .populate({
+          path: "sharedFrom",
+          populate: { path: "user", select: "username profilePicture coverImage" },
+        })
       .sort({ createdAt: -1 })
       .skip(skip)
       .limit(limitNum);
@@ -192,7 +192,7 @@ router.post("/", authenticateToken, upload.single("image"), async (req, res) => 
     });
 
     await User.findByIdAndUpdate(req.user._id, { $inc: { rating: 1 } });
-    await newPost.populate("user", "username profilePicture");
+    await newPost.populate("user", "username profilePicture coverImage");
 
     try {
       await pub.publish("posts", JSON.stringify(newPost));
@@ -249,12 +249,15 @@ router.post("/:id/comment", authenticateToken, async (req, res) => {
     const { content } = req.body;
     if (!content) return res.status(400).json({ error: "Content required" });
 
-    const post = await Post.findById(req.params.id).populate("user", "username");
+    const post = await Post.findById(req.params.id).populate(
+      "user",
+      "username profilePicture coverImage"
+    );
     if (!post) return res.status(404).json({ error: "Post not found" });
 
     post.comments.push({ user: req.user._id, content });
     await post.save();
-    await post.populate("comments.user", "username profilePicture");
+    await post.populate("comments.user", "username profilePicture coverImage");
 
     await User.findByIdAndUpdate(req.user._id, { $inc: { rating: 1 } });
     if (post.user && post.user.toString() !== req.user._id.toString()) {
@@ -286,7 +289,7 @@ router.post(
 
       const post = await Post.findById(req.params.postId).populate(
         "comments.user",
-        "username profilePicture"
+        "username profilePicture coverImage"
       );
       if (!post) return res.status(404).json({ error: "Post not found" });
 
@@ -295,7 +298,10 @@ router.post(
 
       comment.replies.push({ user: req.user._id, content });
       await post.save();
-      await post.populate("comments.replies.user", "username profilePicture");
+      await post.populate(
+        "comments.replies.user",
+        "username profilePicture coverImage"
+      );
 
       await User.findByIdAndUpdate(req.user._id, { $inc: { rating: 1 } });
       if (comment.user && comment.user.toString() !== req.user._id.toString()) {
@@ -345,10 +351,10 @@ router.post("/:id/share", authenticateToken, async (req, res) => {
       image: post.image,
     });
 
-    await sharedPost.populate("user", "username profilePicture");
+    await sharedPost.populate("user", "username profilePicture coverImage");
     await sharedPost.populate({
       path: "sharedFrom",
-      populate: { path: "user", select: "username profilePicture" },
+      populate: { path: "user", select: "username profilePicture coverImage" },
     });
 
     await User.findByIdAndUpdate(req.user._id, { $inc: { rating: 1 } });
@@ -386,7 +392,7 @@ router.put("/:id", authenticateToken, upload.single("image"), async (req, res) =
     }
 
     await post.save();
-    await post.populate("user", "username profilePicture");
+    await post.populate("user", "username profilePicture coverImage");
     res.json({ post });
   } catch (err) {
     console.error("Update post error:", err);
