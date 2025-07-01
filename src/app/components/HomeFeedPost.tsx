@@ -19,6 +19,7 @@ interface UserData {
   _id: string;
   username: string;
   profilePicture?: string;
+  coverImage?: string;
 }
 
 interface Reply {
@@ -166,6 +167,17 @@ export default function HomeFeedPost({ post, onDelete, onShareAdd }: Props) {
       animate={{ opacity: 1, y: 0 }}
       className="bg-white p-6 grid gap-4 border-b-0 sm:border-b sm:border-gray-200 dark:bg-[#2a2a2a] sm:dark:border-gray-700 dark:text-white"
     >
+      {postUser?.coverImage && (
+        <div className="relative w-full h-32 rounded-md overflow-hidden mb-4">
+          <Image
+            src={`${BASE_URL}${postUser.coverImage}`}
+            alt="Cover"
+            fill
+            className="object-cover"
+            onError={(e) => (e.currentTarget.style.display = 'none')}
+          />
+        </div>
+      )}
       <div className="grid grid-cols-[auto,1fr] gap-5 group">
         {/* Avatar */}
         <div className="self-start">
