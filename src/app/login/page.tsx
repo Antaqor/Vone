@@ -64,7 +64,7 @@ export default function LoginPage() {
                 className="w-full max-w-md space-y-6 bg-white text-black dark:bg-[#1B1B1B] dark:text-white p-8 rounded-xl shadow-lg border border-black/10"
             >
                 <div className="text-center space-y-1 mb-4">
-                    <h2 className="text-2xl font-bold">AI Social Network</h2>
+                    <h2 className="text-2xl font-bold">AI Нийгмийн Сүлжээ</h2>
                     <p className="text-sm text-gray-500">AI мэдлэгийг овсгоотой эзэмш</p>
                 </div>
                 <h1 className="text-3xl font-bold">Нэвтрэх</h1>
@@ -107,7 +107,7 @@ export default function LoginPage() {
                         </label>
                         <button
                             type="button"
-                            onClick={() => alert("Forgot Password?")}
+                            onClick={() => alert("Нууц үгээ мартсан уу?")}
                             className="underline hover:text-brand"
                         >
                             Нууц үгээ мартсан?
