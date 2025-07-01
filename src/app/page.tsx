@@ -20,12 +20,17 @@ import {
   ChatBubbleOvalLeftIcon,
   ArrowUpTrayIcon,
   ArrowPathIcon,
+  UserGroupIcon,
+  SparklesIcon,
 } from "@heroicons/react/24/outline";
 import LoadingSpinner from "./components/LoadingSpinner";
 import NextGenPostInput from "./components/NextGenPostInput";
 import { motion } from "framer-motion";
 import { formatPostDate } from "./lib/formatDate";
 import useLiveFeed from "./hooks/useLiveFeed";
+import HomeSlider from "./components/HomeSlider";
+import FAQSection from "./components/FAQSection";
+import Footer from "./components/Footer";
 
 // ────────────────────────────────────────────────────────────────
 // Types
@@ -96,10 +101,7 @@ export default function HomePage() {
     new Date(user.subscriptionExpiresAt) > new Date();
 
 
-  // redirect guest
-  useEffect(() => {
-    if (!loading && !loggedIn) router.push("/login");
-  }, [loading, loggedIn, router]);
+  // show landing page for guests - no redirect
 
   // ────────────────────────────────────────────────────────────
   // Fetch posts (latest first)
@@ -143,8 +145,10 @@ export default function HomePage() {
   );
 
   useEffect(() => {
-    fetchPosts(1);
-  }, [fetchPosts]);
+    if (loggedIn) {
+      fetchPosts(1);
+    }
+  }, [fetchPosts, loggedIn]);
 
   useLiveFeed('feed', (post: Post) => {
     setPosts((prev) => [post, ...prev]);
@@ -152,10 +156,11 @@ export default function HomePage() {
   });
 
   useEffect(() => {
-    if (pageNum > 1) fetchPosts(pageNum, true);
-  }, [pageNum, fetchPosts]);
+    if (loggedIn && pageNum > 1) fetchPosts(pageNum, true);
+  }, [pageNum, fetchPosts, loggedIn]);
 
   useEffect(() => {
+    if (!loggedIn) return;
     const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting && hasMore && !loadingPosts) {
         setPageNum((p) => p + 1);
@@ -166,7 +171,7 @@ export default function HomePage() {
     return () => {
       if (el) observer.unobserve(el);
     };
-  }, [hasMore, loadingPosts]);
+  }, [loggedIn, hasMore, loadingPosts]);
 
   // ────────────────────────────────────────────────────────────
   // Helpers
@@ -324,6 +329,50 @@ export default function HomePage() {
   // ────────────────────────────────────────────────────────────
   // UI
   // ────────────────────────────────────────────────────────────
+  if (!loggedIn) {
+    return (
+      <div className="min-h-screen bg-secondary text-white">
+        <section className="flex flex-col items-center text-center py-20 px-6 space-y-6">
+          <Image src="/wolf.png" alt="VONE" width={160} height={160} className="w-40 h-40 object-contain" />
+          <h1 className="text-4xl md:text-5xl font-extrabold">VONE Social</h1>
+          <p className="text-lg text-gray-300 max-w-2xl">
+            Connect, innovate and grow with the power of AI driven networking.
+          </p>
+          <div className="space-x-4">
+            <Link href="/register" className="bg-brand text-white px-6 py-3 rounded-full font-semibold">
+              Join Now
+            </Link>
+            <Link href="/login" className="border border-brand text-brand px-6 py-3 rounded-full font-semibold">
+              Log In
+            </Link>
+          </div>
+        </section>
+        <HomeSlider />
+        <section className="py-12 bg-[#1b1b1b]">
+          <div className="max-w-4xl mx-auto grid md:grid-cols-3 gap-8 text-center">
+            <div className="space-y-3">
+              <BoltIcon className="w-10 h-10 text-brand mx-auto" />
+              <h3 className="text-xl font-semibold">Innovate</h3>
+              <p className="text-gray-400 text-sm">Share breakthrough ideas with a creative community.</p>
+            </div>
+            <div className="space-y-3">
+              <UserGroupIcon className="w-10 h-10 text-brand mx-auto" />
+              <h3 className="text-xl font-semibold">Connect</h3>
+              <p className="text-gray-400 text-sm">Expand your network and meet pioneers worldwide.</p>
+            </div>
+            <div className="space-y-3">
+              <SparklesIcon className="w-10 h-10 text-brand mx-auto" />
+              <h3 className="text-xl font-semibold">Grow</h3>
+              <p className="text-gray-400 text-sm">AI surfaces opportunities tailored to your ambitions.</p>
+            </div>
+          </div>
+        </section>
+        <FAQSection />
+        <Footer />
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-secondary text-white">
       {/* Membership banner */}
@@ -336,22 +385,6 @@ export default function HomePage() {
       )}
 
       <main className="space-y-6">
-          {/* Prompt login */}
-          {!loggedIn && (
-            <div className="bg-secondary p-6 text-center space-y-3">
-              <p>Feed үзэхийн тулд нэвтрэх эсвэл бүртгүүлэх шаардлагатай.</p>
-              <Link href="/login" className="text-blue-600 underline">
-                Нэвтрэх
-              </Link>
-              <Link
-                href="/register"
-                className="block bg-brand text-white px-3 py-1 rounded w-fit mx-auto"
-              >
-                Бүртгүүлэх
-              </Link>
-            </div>
-          )}
-
           {/* Subscription gate */}
           {loggedIn && !isPro ? (
             <div className="bg-secondary p-6 text-center space-y-3">
