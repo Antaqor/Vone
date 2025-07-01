@@ -57,11 +57,11 @@ export default function LoginPage() {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-[#171717] text-black dark:text-white px-4 py-8">
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-brand via-[#0e8386] to-backgroundDark text-white px-4 py-8">
             <motion.div
                 whileHover={{ opacity: 0.97 }}
                 transition={{ duration: 0.1, ease: "easeOut" }}
-                className="w-full max-w-md space-y-6 bg-white text-black dark:bg-[#1B1B1B] dark:text-white p-8 rounded-xl shadow-lg border border-black/10"
+                className="w-full max-w-md space-y-6 bg-white text-black dark:bg-[#1B1B1B] dark:text-white p-8 rounded-xl shadow-lg"
             >
                 <div className="text-center space-y-1 mb-4">
                     <h2 className="text-2xl font-bold">AI Нийгмийн Сүлжээ</h2>
