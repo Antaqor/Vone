@@ -173,6 +173,14 @@ export default function HomePage() {
     };
   }, [loggedIn, hasMore, loadingPosts]);
 
+  useEffect(() => {
+    if (loggedIn) return;
+    const left = document.getElementById('left');
+    const right = document.getElementById('right');
+    if (left) left.style.backgroundColor = '#171717';
+    if (right) right.style.backgroundColor = '#171717';
+  }, [loggedIn]);
+
   // ────────────────────────────────────────────────────────────
   // Helpers
   // ────────────────────────────────────────────────────────────
@@ -331,44 +339,42 @@ export default function HomePage() {
   // ────────────────────────────────────────────────────────────
   if (!loggedIn) {
     return (
-      <div className="min-h-screen bg-secondary text-white">
+      <div className="min-h-screen bg-[#171717] text-white">
         <section className="flex flex-col items-center text-center py-20 px-6 space-y-6">
           <Image src="/wolf.png" alt="VONE" width={160} height={160} className="w-40 h-40 object-contain" />
-          <h1 className="text-4xl md:text-5xl font-extrabold">VONE Social</h1>
+          <h1 className="text-4xl md:text-5xl font-extrabold">VONE СОШИАЛ</h1>
           <p className="text-lg text-gray-300 max-w-2xl">
-            Connect, innovate and grow with the power of AI driven networking.
+            Хиймэл оюунд суурилсан сүлжээгээр холбогдож, инноваци хийж өсөж хөгжөөрэй.
           </p>
           <div className="space-x-4">
             <Link href="/register" className="bg-brand text-white px-6 py-3 rounded-full font-semibold">
-              Join Now
+              Бүртгүүлэх
             </Link>
             <Link href="/login" className="border border-brand text-brand px-6 py-3 rounded-full font-semibold">
-              Log In
+              Нэвтрэх
             </Link>
           </div>
         </section>
-        <HomeSlider />
         <section className="py-12 bg-[#1b1b1b]">
           <div className="max-w-4xl mx-auto grid md:grid-cols-3 gap-8 text-center">
             <div className="space-y-3">
               <BoltIcon className="w-10 h-10 text-brand mx-auto" />
-              <h3 className="text-xl font-semibold">Innovate</h3>
-              <p className="text-gray-400 text-sm">Share breakthrough ideas with a creative community.</p>
+              <h3 className="text-xl font-semibold">Инноваци</h3>
+              <p className="text-gray-400 text-sm">Шинийг санаачилсан санаагаа бүтээлч хамт олонтой хуваалцаарай.</p>
             </div>
             <div className="space-y-3">
               <UserGroupIcon className="w-10 h-10 text-brand mx-auto" />
-              <h3 className="text-xl font-semibold">Connect</h3>
-              <p className="text-gray-400 text-sm">Expand your network and meet pioneers worldwide.</p>
+              <h3 className="text-xl font-semibold">Холбогдох</h3>
+              <p className="text-gray-400 text-sm">Сүлжээгээ өргөжүүлж дэлхийн манлайлагчидтай танилцаарай.</p>
             </div>
             <div className="space-y-3">
               <SparklesIcon className="w-10 h-10 text-brand mx-auto" />
-              <h3 className="text-xl font-semibold">Grow</h3>
-              <p className="text-gray-400 text-sm">AI surfaces opportunities tailored to your ambitions.</p>
+              <h3 className="text-xl font-semibold">Өсөх</h3>
+              <p className="text-gray-400 text-sm">Хиймэл оюун таны зорилгод тохирсон боломжуудыг илрүүлнэ.</p>
             </div>
           </div>
         </section>
         <FAQSection />
-        <Footer />
       </div>
     );
   }
