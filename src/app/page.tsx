@@ -95,6 +95,7 @@ export default function HomePage() {
   const loadingPostsRef = useRef(false);
   const [refreshing, setRefreshing] = useState(false);
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
+  const [memberCount, setMemberCount] = useState(0);
 
   const isPro =
     user?.subscriptionExpiresAt &&
@@ -179,6 +180,27 @@ export default function HomePage() {
     const right = document.getElementById('right');
     if (left) left.style.backgroundColor = '#171717';
     if (right) right.style.backgroundColor = '#171717';
+  }, [loggedIn]);
+
+  useEffect(() => {
+    if (loggedIn) return;
+    let mounted = true;
+    const fetchCount = async () => {
+      try {
+        const { data } = await axios.get<{ count: number }>(
+          `${BASE_URL}/api/users/active-subscribers`
+        );
+        if (mounted) setMemberCount(data.count);
+      } catch (err) {
+        console.error('Member count error:', err);
+      }
+    };
+    fetchCount();
+    const id = setInterval(fetchCount, 10000);
+    return () => {
+      mounted = false;
+      clearInterval(id);
+    };
   }, [loggedIn]);
 
   // ────────────────────────────────────────────────────────────
@@ -338,9 +360,16 @@ export default function HomePage() {
   // UI
   // ────────────────────────────────────────────────────────────
   if (!loggedIn) {
+
+    const featureAnimation = {
+      initial: { opacity: 0, y: 20 },
+      animate: (i: number) => ({ opacity: 1, y: 0, transition: { delay: i * 0.2 } }),
+      whileHover: { scale: 1.05 },
+    };
+
     return (
       <div className="min-h-screen bg-[#171717] text-white">
-        <section className="flex flex-col items-center text-center py-20 px-6 space-y-6">
+        <section className="flex flex-col items-center text-center py-20 px-6 space-y-6 bg-[#171717]">
           <Image src="/wolf.png" alt="VONE" width={160} height={160} className="w-40 h-40 object-contain" />
           <h1 className="text-4xl md:text-5xl font-extrabold">VONE СОШИАЛ</h1>
           <p className="text-lg text-gray-300 max-w-2xl">
@@ -355,26 +384,49 @@ export default function HomePage() {
             </Link>
           </div>
         </section>
-        <section className="py-12 bg-[#1b1b1b]">
+        <section className="py-12 bg-[#171717]">
           <div className="max-w-4xl mx-auto grid md:grid-cols-3 gap-8 text-center">
-            <div className="space-y-3">
-              <BoltIcon className="w-10 h-10 text-brand mx-auto" />
-              <h3 className="text-xl font-semibold">Инноваци</h3>
-              <p className="text-gray-400 text-sm">Шинийг санаачилсан санаагаа бүтээлч хамт олонтой хуваалцаарай.</p>
-            </div>
-            <div className="space-y-3">
-              <UserGroupIcon className="w-10 h-10 text-brand mx-auto" />
-              <h3 className="text-xl font-semibold">Холбогдох</h3>
-              <p className="text-gray-400 text-sm">Сүлжээгээ өргөжүүлж дэлхийн манлайлагчидтай танилцаарай.</p>
-            </div>
-            <div className="space-y-3">
-              <SparklesIcon className="w-10 h-10 text-brand mx-auto" />
-              <h3 className="text-xl font-semibold">Өсөх</h3>
-              <p className="text-gray-400 text-sm">Хиймэл оюун таны зорилгод тохирсон боломжуудыг илрүүлнэ.</p>
-            </div>
+            {[{
+              icon: <BoltIcon className="w-10 h-10 text-brand mx-auto" />,
+              title: "Инноваци",
+              text: "Шинийг санаачилсан санаагаа бүтээлч хамт олонтой хуваалцаарай.",
+            },
+            {
+              icon: <UserGroupIcon className="w-10 h-10 text-brand mx-auto" />,
+              title: "Холбогдох",
+              text: "Сүлжээгээ өргөжүүлж дэлхийн манлайлагчидтай танилцаарай.",
+            },
+            {
+              icon: <SparklesIcon className="w-10 h-10 text-brand mx-auto" />,
+              title: "Өсөх",
+              text: "Хиймэл оюун таны зорилгод тохирсон боломжуудыг илрүүлнэ.",
+            }].map((f, i) => (
+              <motion.div
+                key={i}
+                custom={i}
+                variants={featureAnimation}
+                initial="initial"
+                animate="animate"
+                whileHover="whileHover"
+                className="space-y-3"
+              >
+                {f.icon}
+                <h3 className="text-xl font-semibold">{f.title}</h3>
+                <p className="text-gray-400 text-sm">
+                  {f.text}
+                  {f.title === "Холбогдох" && (
+                    <span className="block text-brand text-lg font-bold mt-2">
+                      {memberCount.toLocaleString()} гишүүн
+                    </span>
+                  )}
+                </p>
+              </motion.div>
+            ))}
           </div>
         </section>
-        <FAQSection />
+        <div className="bg-[#171717]">
+          <FAQSection />
+        </div>
       </div>
     );
   }
