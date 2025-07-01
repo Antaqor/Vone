@@ -248,15 +248,15 @@ export default function RegisterMultiStepPage() {
 
                 {step === 1 && (
                     <form onSubmit={(e) => e.preventDefault()} className="space-y-6">
-                        <h1 className="text-3xl font-bold text-[#30c9e8]">Create your account</h1>
+                        <h1 className="text-3xl font-bold text-[#30c9e8]">Бүртгэлээ үүсгэх</h1>
 
                         {/* USERNAME */}
                         <div>
-                            <label className="block text-sm font-medium text-black dark:text-white mb-1">Username</label>
+                            <label className="block text-sm font-medium text-black dark:text-white mb-1">Хэрэглэгчийн нэр</label>
                             <input
                                 type="text"
                                 className={getInputClass("username")}
-                                placeholder="mycoolusername"
+                                placeholder="ner"
                                 value={username}
                                 onChange={(e) => setUsername(e.target.value)}
                             />
@@ -267,7 +267,7 @@ export default function RegisterMultiStepPage() {
 
                         {/* PHONE NUMBER */}
                         <div>
-                            <label className="block text-sm font-medium text-black dark:text-white mb-1">Phone number</label>
+                            <label className="block text-sm font-medium text-black dark:text-white mb-1">Утасны дугаар</label>
                             <input
                                 type="text"
                                 className={getInputClass("phoneNumber")}
@@ -282,9 +282,9 @@ export default function RegisterMultiStepPage() {
 
                         {/* DATE OF BIRTH */}
                         <div>
-                            <label className="block text-sm font-medium text-black dark:text-white mb-1">Date of birth</label>
+                            <label className="block text-sm font-medium text-black dark:text-white mb-1">Төрсөн огноо</label>
                             <p className="text-xs text-gray-500 mb-2">
-                                This will not be shown publicly. Confirm your own age.
+                                Энэ нь олон нийтэд харагдахгүй. Насаа баталгаажуулна уу.
                             </p>
                             <div className="flex space-x-2">
                                 <div className="relative flex-1">
@@ -293,21 +293,8 @@ export default function RegisterMultiStepPage() {
                                         value={birthMonth}
                                         onChange={(e) => setBirthMonth(e.target.value)}
                                     >
-                                        <option value="">Month</option>
-                                        {[
-                                            "January",
-                                            "February",
-                                            "March",
-                                            "April",
-                                            "May",
-                                            "June",
-                                            "July",
-                                            "August",
-                                            "September",
-                                            "October",
-                                            "November",
-                                            "December",
-                                        ].map((m) => (
+                                        <option value="">Сар</option>
+                                        {Array.from({ length: 12 }, (_, i) => `${i + 1}-р сар`).map((m) => (
                                             <option key={m} value={m}>
                                                 {m}
                                             </option>
@@ -329,7 +316,7 @@ export default function RegisterMultiStepPage() {
                                         value={birthDay}
                                         onChange={(e) => setBirthDay(e.target.value)}
                                     >
-                                        <option value="">Day</option>
+                                        <option value="">Өдөр</option>
                                         {Array.from({ length: 31 }, (_, i) => i + 1).map((d) => (
                                             <option key={d} value={d}>
                                                 {d}
@@ -352,7 +339,7 @@ export default function RegisterMultiStepPage() {
                                         value={birthYear}
                                         onChange={(e) => setBirthYear(e.target.value)}
                                     >
-                                        <option value="">Year</option>
+                                        <option value="">Он</option>
                                         {Array.from({ length: 70 }, (_, i) => 2025 - i).map((y) => (
                                             <option key={y} value={y}>
                                                 {y}
@@ -387,19 +374,19 @@ export default function RegisterMultiStepPage() {
                             onClick={handleNext}
                             className="w-full bg-[#30c9e8] text-white font-semibold py-3 rounded-lg hover:bg-[#28b6d3] active:bg-[#239bb3] transition-colors"
                         >
-                            Next
+                            Дараах
                         </button>
                     </form>
                 )}
 
                 {step === 2 && (
                     <form onSubmit={handleSubmit} className="space-y-6">
-                        <h1 className="text-3xl font-bold text-[#30c9e8]">Additional Details</h1>
+                        <h1 className="text-3xl font-bold text-[#30c9e8]">Нэмэлт мэдээлэл</h1>
 
                         {/* LOGIN PASSWORD */}
                         <div>
                             <label className="block text-sm font-medium text-black dark:text-white mb-1">
-                                Login Password
+                                Нууц үг
                             </label>
                             <input
                                 type="password"
@@ -486,12 +473,6 @@ export default function RegisterMultiStepPage() {
                     </form>
                 )}
             </motion.div>
-            <p className="text-center mt-4 text-sm">
-                Already have an account?{' '}
-                <a href="/login" className="text-[#30c9e8] underline hover:text-[#28b6d3]">
-                    Login
-                </a>
-            </p>
         </div>
     );
 }
