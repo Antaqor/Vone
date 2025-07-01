@@ -238,8 +238,8 @@ export default function RegisterMultiStepPage() {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-[#171717] text-black dark:text-white px-4 py-8">
-            <div className="w-full max-w-md space-y-6 bg-white text-black dark:bg-[#1B1B1B] dark:text-white p-8 rounded-xl shadow-lg border border-black/10">
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-brand via-[#0e8386] to-backgroundDark text-white px-4 py-8">
+            <div className="w-full max-w-md space-y-6 bg-white text-black dark:bg-[#1B1B1B] dark:text-white p-8 rounded-xl shadow-lg">
                 {error && <p className="text-red-600">{error}</p>}
                 {success && <p className="text-green-600">{success}</p>}
 
