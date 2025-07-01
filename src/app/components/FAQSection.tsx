@@ -18,7 +18,7 @@ const SingleFAQItem: React.FC<FAQItemProps> = ({
     return (
         <div
             onClick={onClick}
-            className="border-b border-gray-200 cursor-pointer py-4 hover:bg-gray-50 transition"
+            className="border-b border-gray-200 cursor-pointer py-4"
         >
             <div className="flex items-center justify-between">
                 <h3 className="font-semibold text-base md:text-lg text-gray-900">
@@ -98,7 +98,7 @@ const FAQSection = () => {
                 className="max-w-2xl mx-auto mb-10 text-center"
             >
                 <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
-                    VONE SOCIAL
+                    VONE СОШИАЛ
                 </h2>
                 <p className="text-gray-500 text-sm md:text-base">
                     Илүү дэлгэрэнгүй мэдээллийг доороос аваарай
