@@ -37,7 +37,6 @@ interface UserData {
   coverImage?: string;
   following?: string[];
   location?: string;
-  subscriptionExpiresAt?: string;
   accessToken?: string;
   rating?: number;
 }
@@ -91,11 +90,6 @@ export default function HomePage() {
   const loadingPostsRef = useRef(false);
   const [refreshing, setRefreshing] = useState(false);
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
-
-  const isPro =
-    user?.subscriptionExpiresAt &&
-    new Date(user.subscriptionExpiresAt) > new Date();
-
 
   // redirect guest
   useEffect(() => {
@@ -362,15 +356,6 @@ export default function HomePage() {
   // ────────────────────────────────────────────────────────────
   return (
     <div className="min-h-screen bg-secondary text-white">
-      {/* Membership banner */}
-      {loggedIn && !isPro && (
-        <div className="bg-brand text-white text-center py-2 px-4">
-          <Link href="/subscription" className="font-semibold underline">
-            Гишүүн болох – Онцгой боломжуудыг нээх
-          </Link>
-        </div>
-      )}
-
 
       {/* Outer grid */}
       <div
@@ -400,22 +385,10 @@ export default function HomePage() {
             </div>
           )}
 
-          {/* Subscription gate */}
-          {loggedIn && !isPro ? (
-            <div className="bg-secondary p-6 text-center space-y-3">
-              <p>Feed үзэхийн тулд гишүүнчлэл идэвхжүүлнэ үү.</p>
-              <Link href="/subscription" className="text-blue-600 underline">
-                Subscribe
-              </Link>
-            </div>
-          ) : (
-            <>
-              {/* Create post */}
-              {loggedIn && (
-                <NextGenPostInput onPost={addNewPost} />
-              )}
+          {/* Create post */}
+          {loggedIn && <NextGenPostInput onPost={addNewPost} />}
 
-              <div className="flex justify-end p-4">
+          <div className="flex justify-end p-4">
                 <button
                   onClick={refreshPosts}
                   aria-label="Refresh feed"
@@ -425,8 +398,8 @@ export default function HomePage() {
                 </button>
               </div>
 
-              {/* Posts list */}
-              <div className="m-0 p-0">
+          {/* Posts list */}
+          <div className="m-0 p-0">
               {loadingPosts && pageNum === 1 ? (
                   <LoadingSpinner />
                 ) : (
@@ -705,8 +678,6 @@ export default function HomePage() {
             {loadingPosts && pageNum > 1 && <LoadingSpinner />}
             <div ref={loadMoreRef} />
           </div>
-            </>
-        )}
         </main>
       </div>
     </div>
