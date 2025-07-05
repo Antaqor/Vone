@@ -1,10 +1,17 @@
-import { Request, Response } from 'express';
+import type { Request, Response } from 'express';
 import Post from '../models/Post';
 import User from '../models/User';
 import { adjustTrust } from '../utils/adjustTrust';
 
-export async function createPost(req: Request, res: Response) {
-  const { content } = req.body;
+interface CreatePostBody {
+  content?: string;
+}
+
+export async function createPost(
+  req: Request<{}, {}, CreatePostBody>,
+  res: Response
+) {
+  const { content } = req.body || {};
   const image = (req as any).file?.filename;
 
   const post = await Post.create({
@@ -33,10 +40,17 @@ export async function likePost(req: Request, res: Response) {
   res.json({ likes: post.likes.length });
 }
 
-export async function commentPost(req: Request, res: Response) {
+interface CommentPostBody {
+  content?: string;
+}
+
+export async function commentPost(
+  req: Request<{}, {}, CommentPostBody>,
+  res: Response
+) {
   const post = await Post.findById(req.params.id);
   if (!post) return res.status(404).json({ error: 'Post not found' });
-  post.comments.push({ user: (req as any).user._id, content: req.body.content });
+  post.comments.push({ user: (req as any).user._id, content: req.body.content || '' });
   await post.save();
   await adjustTrust((req as any).user._id, 1);
   res.json({ comments: post.comments });
