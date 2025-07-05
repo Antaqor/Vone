@@ -40,6 +40,13 @@ bun dev
 - `VAPID_PUBLIC_KEY` – Web-Push олон нийтэд түгээх түлхүүр
 - `VAPID_PRIVATE_KEY` – Web-Push нууц түлхүүр
 - `VAPID_EMAIL` – Харицах имэйл хаяг
+- `HCAPTCHA_SECRET` – hCaptcha баталгаажуулалтын нууц
+
+Toxicity модел ашиглахын тулд `@xenova/transformers` санг суулгана:
+
+```bash
+npm install @xenova/transformers
+```
 
 ## Real-time feed (Change Streams)
 
