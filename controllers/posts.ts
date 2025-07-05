@@ -8,7 +8,7 @@ interface CreatePostBody {
 }
 
 export async function createPost(
-  req: Request<{}, {}, CreatePostBody>,
+  req: Request,
   res: Response
 ) {
   const { content } = req.body || {};
@@ -45,7 +45,7 @@ interface CommentPostBody {
 }
 
 export async function commentPost(
-  req: Request<{}, {}, CommentPostBody>,
+  req: Request,
   res: Response
 ) {
   const post = await Post.findById(req.params.id);
