@@ -98,7 +98,7 @@ export default function UsersPage() {
     }
 
     return (
-        <div className="min-h-screen bg-[#212121] text-black p-4">
+        <div className="min-h-screen bg-[#212121] text-white p-4">
             <h1 className="text-2xl font-bold mb-6 text-center">Гишүүд</h1>
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
                 <input
@@ -106,12 +106,12 @@ export default function UsersPage() {
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                     placeholder="Search members"
-                    className="flex-1 px-3 py-2 rounded border bg-gray-100 focus:outline-none"
+                    className="flex-1 px-3 py-2 rounded border border-gray-700 bg-[#2c2c2c] text-gray-200 focus:outline-none"
                 />
                 <select
                     value={sort}
                     onChange={(e) => setSort(e.target.value)}
-                    className="px-3 py-2 rounded border bg-gray-100 focus:outline-none"
+                    className="px-3 py-2 rounded border border-gray-700 bg-[#2c2c2c] text-gray-200 focus:outline-none"
                 >
                     <option value="active">Most active</option>
                     <option value="alphabetical">Alphabetical</option>
@@ -125,7 +125,7 @@ export default function UsersPage() {
                         <motion.div
                             key={user._id}
                             onClick={() => router.push(`/profile/${user._id}`)}
-                            className="bg-[#212121] border border-gray-200 rounded-lg p-4 flex flex-col items-center shadow transition hover:bg-[#323232] hover:shadow-lg hover:-translate-y-1 hover:ring-1 hover:ring-[#30c9e8] cursor-pointer"
+                            className="bg-[#212121] border border-gray-700 rounded-lg p-4 flex flex-col items-center shadow transition-transform duration-300 hover:bg-[#323232] hover:shadow-lg hover:-translate-y-1 hover:ring-1 hover:ring-[#30c9e8] cursor-pointer"
                         >
                             <div className="relative mb-3">
                                 {user.profilePicture ? (
@@ -139,9 +139,9 @@ export default function UsersPage() {
                                 ) : (
                                     <div className="w-24 h-24 rounded-full bg-gray-200 ring-2 ring-[#30c9e8]" />
                                 )}
-                                <span className={`absolute bottom-1 right-1 w-3 h-3 rounded-full border border-white ${statusColors[status]}`} />
+                                <span className={`absolute bottom-1 right-1 w-3 h-3 rounded-full border border-gray-700 ${statusColors[status]}`} />
                             </div>
-                            <p className="font-semibold text-gray-800">{user.username}</p>
+                            <p className="font-semibold text-gray-100">{user.username}</p>
                             {user.location && (
                                 <p className="text-xs text-gray-500 mt-1">{user.location}</p>
                             )}
