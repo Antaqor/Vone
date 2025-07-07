@@ -19,7 +19,6 @@ import {
   HeartIcon as HeartOutline,
   ChatBubbleOvalLeftIcon,
   ArrowUpTrayIcon,
-  ArrowPathIcon,
 } from "@heroicons/react/24/outline";
 import LoadingSpinner from "./components/LoadingSpinner";
 import NextGenPostInput from "./components/NextGenPostInput";
@@ -387,16 +386,6 @@ export default function HomePage() {
 
           {/* Create post */}
           {loggedIn && <NextGenPostInput onPost={addNewPost} />}
-
-          <div className="flex justify-end p-4">
-                <button
-                  onClick={refreshPosts}
-                  aria-label="Refresh feed"
-                  className={`p-2 rounded-full hover:bg-gray-200 ${refreshing ? "animate-spin" : ""}`}
-                >
-                  <ArrowPathIcon className="w-5 h-5" />
-                </button>
-              </div>
 
           {/* Posts list */}
           <div className="m-0 p-0">
