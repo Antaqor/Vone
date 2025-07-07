@@ -328,7 +328,7 @@ export default function HomePage() {
 
 
         {/* Main content */}
-        <main>
+        <main className="pb-24 md:pb-0">
           {/* Prompt login */}
           {!loggedIn && (
             <div className="bg-secondary p-6 text-center space-y-3">
