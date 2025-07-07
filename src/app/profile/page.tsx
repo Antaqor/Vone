@@ -251,14 +251,14 @@ export default function MyOwnProfilePage() {
 
             {/* My posts */}
             <div
-                className="mx-auto max-w-5xl w-full grid mt-4"
+                className="mx-auto max-w-5xl w-full grid mt-8"
                 style={{
                     gridTemplateColumns:
                         "var(--barcelona-threadline-column-width) minmax(0, 1fr)",
                 }}
             >
-                <main className="m-0 p-0">
-                    <h3 className="text-xl font-bold mb-3 ml-2">Миний нийтлэлүүд</h3>
+                <main className="m-0 p-0 px-4">
+                    <h2 className="text-xl font-semibold mb-4">Миний нийтлэлүүд</h2>
                     {loadingPosts ? (
                         <div className="space-y-4">
                             {Array.from({ length: 2 }).map((_, i) => (
