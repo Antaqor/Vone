@@ -137,7 +137,7 @@ export default function MyOwnProfilePage() {
     // Render logic
     if (loadingProfile) {
         return (
-            <div className="p-4 space-y-4">
+            <div className="p-4">
                 <div className="h-40 bg-gray-200 rounded animate-pulse" />
                 <div className="flex items-center space-x-4 animate-pulse">
                     <div className="w-20 h-20 rounded-full bg-gray-300" />
@@ -260,7 +260,7 @@ export default function MyOwnProfilePage() {
                 <main className="m-0 p-0 px-4">
                     <h2 className="text-xl font-semibold mb-4">Миний нийтлэлүүд</h2>
                     {loadingPosts ? (
-                        <div className="space-y-4">
+                        <div>
                             {Array.from({ length: 2 }).map((_, i) => (
                                 <div key={i} className="h-32 bg-gray-200 rounded animate-pulse" />
                             ))}

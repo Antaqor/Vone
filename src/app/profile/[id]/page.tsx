@@ -110,7 +110,7 @@ export default function PublicProfilePage() {
     // UI loading state
     if (loading) {
         return (
-            <div className="p-4 space-y-4">
+            <div className="p-4">
                 <div className="h-40 bg-gray-800 rounded animate-pulse" />
                 <div className="flex items-center space-x-4 animate-pulse">
                     <div className="w-20 h-20 rounded-full bg-gray-700" />
