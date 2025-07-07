@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { BASE_URL } from "../../lib/config";
 
 export interface Conversation {
   id: string;
@@ -29,7 +30,7 @@ export default function ChatList({ conversations, activeId, onSelect }: ChatList
           <Link href={`/profile/${conv.user.id}`} target="_blank" className="shrink-0">
             {conv.user.avatar ? (
               <Image
-                src={conv.user.avatar}
+                src={`${BASE_URL}${conv.user.avatar}`}
                 alt={conv.user.name}
                 width={40}
                 height={40}

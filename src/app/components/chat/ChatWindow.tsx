@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { PaperAirplaneIcon } from "@heroicons/react/24/solid";
 import useChat, { ChatMessage } from "../../hooks/useChat";
+import { BASE_URL } from "../../lib/config";
 
 interface UserInfo {
   id: string;
@@ -54,7 +56,7 @@ export default function ChatWindow({ chatId, user, onBack }: ChatWindowProps) {
         <Link href={`/profile/${user.id}`} target="_blank" className="mr-2">
           {user.avatar ? (
             <Image
-              src={user.avatar}
+              src={`${BASE_URL}${user.avatar}`}
               alt={user.name}
               width={32}
               height={32}
@@ -78,20 +80,44 @@ export default function ChatWindow({ chatId, user, onBack }: ChatWindowProps) {
         {!loading && messages.length === 0 && (
           <div className="text-center text-gray-500 py-4">No messages yet</div>
         )}
-        {!loading && messages.map((msg: ChatMessage) => (
-          <div
-            key={msg._id}
-            className={`flex ${msg.sender._id === me ? "justify-end" : "justify-start"}`}
-          >
+        {!loading && messages.map((msg: ChatMessage) => {
+          const isMe = msg.sender._id === me;
+          return (
             <div
-              className={`max-w-xs px-3 py-2 rounded-lg text-sm ${
-                msg.sender._id === me ? "bg-brand text-white" : "bg-gray-200 text-black"
-              }`}
+              key={msg._id}
+              className={`flex items-end gap-2 ${isMe ? "justify-end" : "justify-start"}`}
             >
-              {msg.text}
+              {!isMe && (
+                <Image
+                  src={`${BASE_URL}${msg.sender.profilePicture || ""}`}
+                  alt={msg.sender.username}
+                  width={24}
+                  height={24}
+                  className="rounded-full"
+                />
+              )}
+              <div>
+                <div
+                  className={`px-3 py-2 rounded-2xl text-sm ${
+                    isMe
+                      ? "bg-brand text-white rounded-br-none"
+                      : "bg-gray-200 text-black rounded-bl-none"
+                  }`}
+                >
+                  {msg.text}
+                </div>
+                <div
+                  className={`text-[10px] text-gray-500 mt-1 ${isMe ? "text-right" : ""}`}
+                >
+                  {new Date(msg.createdAt).toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
+                </div>
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
         {typing && (
           <div className="text-xs text-gray-500">{user.name} бичиж байна...</div>
         )}
@@ -106,13 +132,14 @@ export default function ChatWindow({ chatId, user, onBack }: ChatWindowProps) {
           className="w-full border rounded p-2 resize-none"
           placeholder="Type a message"
         />
-        <div className="flex justify-between">
+        <div className="flex justify-between items-center">
           <button onClick={() => setText((t) => t + "\u{1F642}")}>🙂</button>
           <button
             onClick={handleSend}
-            className="bg-brand text-white px-3 py-1 rounded ml-2"
+            aria-label="Send message"
+            className="bg-brand text-white p-2 rounded-full ml-2"
           >
-            Send
+            <PaperAirplaneIcon className="w-5 h-5 rotate-90" />
           </button>
         </div>
       </div>
