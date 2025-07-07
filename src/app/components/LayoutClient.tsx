@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { AuthProvider, useAuth } from "../context/AuthContext";
 import { CartProvider } from "../context/CartContext";
@@ -22,7 +22,6 @@ import SidebarControl from "./SidebarControl";
 import NavigationLoader from "./NavigationLoader";
 import LoadingOverlay from "./LoadingOverlay";
 import LoginRequiredPopup from "./LoginRequiredPopup";
-import PageSkeleton from "./PageSkeleton";
 import Link from "next/link";
 
 function AuthGuard({ children }: { children: React.ReactNode }) {
@@ -31,23 +30,29 @@ function AuthGuard({ children }: { children: React.ReactNode }) {
   const { loggedIn, loading } = useAuth();
   const publicPaths = ["/login", "/register"];
   const [showPrompt, setShowPrompt] = useState(false);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     if (!loading && !loggedIn && !publicPaths.some((p) => pathname.startsWith(p))) {
       setShowPrompt(true);
-      const timer = setTimeout(() => router.push("/login"), 1500);
-      return () => clearTimeout(timer);
+      timerRef.current = setTimeout(() => router.push("/login"), 1500);
+      return () => {
+        if (timerRef.current) clearTimeout(timerRef.current);
+      };
     }
   }, [loading, loggedIn, pathname, router]);
+
+  const handleClosePrompt = () => {
+    if (timerRef.current) clearTimeout(timerRef.current);
+    setShowPrompt(false);
+    router.push("/login");
+  };
 
   return (
     <>
       {children}
       {showPrompt && (
-        <>
-          <PageSkeleton />
-          <LoginRequiredPopup />
-        </>
+        <LoginRequiredPopup onClose={handleClosePrompt} />
       )}
     </>
   );
