@@ -99,10 +99,16 @@ export default function ChatPage() {
   }, [active]);
 
   return (
-    <div className="flex h-[calc(100vh-64px)]">
-      <aside className="hidden md:block w-1/3 border-r border-supportBorder">
+    <div className="flex h-[calc(100vh-64px)] pb-20 md:pb-0">
+      <aside
+        className={`${active ? "hidden" : ""} md:block w-full md:w-1/3 border-r border-supportBorder overflow-y-auto`}
+      >
         <h2 className="p-3 font-semibold">Мессеж</h2>
-        <ChatList conversations={conversations} activeId={active || undefined} onSelect={setActive} />
+        <ChatList
+          conversations={conversations}
+          activeId={active || undefined}
+          onSelect={setActive}
+        />
       </aside>
       <div className="flex-1 relative">
         <div className="md:hidden border-b border-supportBorder p-3 font-semibold">Мессеж</div>
