@@ -58,12 +58,12 @@ export default function ChatWindow({ chatId, user, onBack }: ChatWindowProps) {
             <Image
               src={`${BASE_URL}${user.avatar}`}
               alt={user.name}
-              width={32}
-              height={32}
-              className="rounded-full"
+              width={40}
+              height={40}
+              className="avatar"
             />
           ) : (
-            <div className="w-8 h-8 rounded-full bg-brand text-white flex items-center justify-center text-sm">
+            <div className="avatar bg-brand text-white flex items-center justify-center text-sm">
               {user.name.charAt(0).toUpperCase()}
             </div>
           )}
@@ -91,9 +91,9 @@ export default function ChatWindow({ chatId, user, onBack }: ChatWindowProps) {
                 <Image
                   src={`${BASE_URL}${msg.sender.profilePicture || ""}`}
                   alt={msg.sender.username}
-                  width={24}
-                  height={24}
-                  className="rounded-full"
+                  width={40}
+                  height={40}
+                  className="avatar"
                 />
               )}
               <div>

@@ -7,6 +7,15 @@
     border-radius: 0; /* Example custom override */
 }
 
+/* Standard avatar styling */
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
 /* Override or add your custom light-theme styles here. */
 html,
 body {

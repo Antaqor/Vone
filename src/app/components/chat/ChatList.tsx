@@ -34,10 +34,10 @@ export default function ChatList({ conversations, activeId, onSelect }: ChatList
                 alt={conv.user.name}
                 width={40}
                 height={40}
-                className="rounded-full"
+                className="avatar"
               />
             ) : (
-              <div className="w-10 h-10 rounded-full bg-brand text-white flex items-center justify-center text-lg">
+              <div className="avatar bg-brand text-white flex items-center justify-center text-lg">
                 {conv.user.name.charAt(0).toUpperCase()}
               </div>
             )}
