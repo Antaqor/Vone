@@ -8,7 +8,12 @@ export default function SidebarControl() {
     const left = document.getElementById('left-sidebar');
     const right = document.getElementById('right-sidebar');
     if (!left || !right) return;
-    if (pathname.startsWith('/dashboard') || pathname.startsWith('/classroom')) {
+    if (
+      pathname.startsWith('/dashboard') ||
+      pathname.startsWith('/classroom') ||
+      pathname.startsWith('/login') ||
+      pathname.startsWith('/register')
+    ) {
       left.style.display = 'none';
       right.style.display = 'none';
     } else {
