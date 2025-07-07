@@ -21,6 +21,8 @@ import BottomNav from "./BottomNav";
 import SidebarControl from "./SidebarControl";
 import NavigationLoader from "./NavigationLoader";
 import LoadingOverlay from "./LoadingOverlay";
+import LoginRequiredPopup from "./LoginRequiredPopup";
+import PageSkeleton from "./PageSkeleton";
 import Link from "next/link";
 
 function AuthGuard({ children }: { children: React.ReactNode }) {
@@ -28,18 +30,27 @@ function AuthGuard({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const { loggedIn, loading } = useAuth();
   const publicPaths = ["/login", "/register"];
+  const [showPrompt, setShowPrompt] = useState(false);
 
   useEffect(() => {
-    if (
-      !loading &&
-      !loggedIn &&
-      !publicPaths.some((p) => pathname.startsWith(p))
-    ) {
-      router.push("/login");
+    if (!loading && !loggedIn && !publicPaths.some((p) => pathname.startsWith(p))) {
+      setShowPrompt(true);
+      const timer = setTimeout(() => router.push("/login"), 1500);
+      return () => clearTimeout(timer);
     }
   }, [loading, loggedIn, pathname, router]);
 
-  return <>{children}</>;
+  return (
+    <>
+      {children}
+      {showPrompt && (
+        <>
+          <PageSkeleton />
+          <LoginRequiredPopup />
+        </>
+      )}
+    </>
+  );
 }
 
 function NotificationNavItem() {
