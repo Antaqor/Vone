@@ -8,7 +8,7 @@ import {
     UserGroupIcon,
     AcademicCapIcon,
     BellIcon,
-    ChatBubbleLeftRightIcon,
+    ChatBubbleOvalLeftEllipsisIcon,
 } from "@heroicons/react/24/outline";
 import { useAuth } from "../context/AuthContext";
 import { BASE_URL } from "../lib/config";
@@ -273,7 +273,7 @@ export default function Header() {
                                             onClick={() => setIsMenuOpen(false)}
                                             className="flex items-center gap-2 hover:text-brand"
                                         >
-                                            <ChatBubbleLeftRightIcon className="w-6 h-6" />
+                                            <ChatBubbleOvalLeftEllipsisIcon className="w-6 h-6" />
                                             Чат
                                         </Link>
                                     </li>
