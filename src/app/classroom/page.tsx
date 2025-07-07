@@ -126,7 +126,7 @@ export default function ClassroomPage() {
   return (
     <div className="flex flex-col md:flex-row min-h-screen text-black">
       <button
-        className="md:hidden absolute top-2 left-2 z-20 p-2 bg-[#212121] hover:bg-[#323232] rounded-full shadow"
+        className="md:hidden absolute top-2 left-2 z-[1000] p-2 bg-[#212121] hover:bg-[#323232] rounded-full shadow"
         onClick={() => setSidebarOpen(true)}
         aria-label="Open lessons"
       >
@@ -136,10 +136,10 @@ export default function ClassroomPage() {
         <div className="fixed inset-0 bg-black/40 z-10 md:hidden" onClick={() => setSidebarOpen(false)} />
       )}
       <aside
-        className={`bg-[#212121] p-6 border-r border-gray-200 overflow-y-auto md:h-screen md:sticky md:top-0 fixed inset-y-0 left-0 z-20 w-64 md:w-80 transform transition-transform ${sidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}`}
+        className={`bg-[#212121] p-6 border-r border-gray-200 overflow-y-auto md:h-screen md:sticky md:top-0 fixed inset-y-0 left-0 z-[1000] w-64 md:w-80 transform transition-transform ${sidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}`}
       >
         <button
-          className="md:hidden absolute top-2 right-2 p-1"
+          className="md:hidden absolute top-2 right-2 p-1 z-[1001]"
           onClick={() => setSidebarOpen(false)}
           aria-label="Close lessons"
         >
