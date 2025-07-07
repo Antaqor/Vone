@@ -137,9 +137,9 @@ export default function ChatWindow({ chatId, user, onBack }: ChatWindowProps) {
           <button
             onClick={handleSend}
             aria-label="Send message"
-            className="bg-brand text-white p-2 rounded-full ml-2"
+            className="bg-brand text-white p-3 rounded-full ml-2 shadow-md hover:opacity-90"
           >
-            <PaperAirplaneIcon className="w-5 h-5 rotate-90" />
+            <PaperAirplaneIcon className="w-6 h-6 -rotate-45" />
           </button>
         </div>
       </div>
