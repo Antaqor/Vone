@@ -144,7 +144,7 @@ export default function ProductDashboardPage() {
 
   /* ── render ──────────────────────────────────────── */
   return (
-    <main className="min-h-screen bg-white text-black px-4 py-8">
+    <main className="min-h-screen bg-[#212121] text-black px-4 py-8">
       <div className="max-w-5xl mx-auto space-y-10">
         <h1 className="text-3xl font-bold mb-2 text-center uppercase tracking-wider">
           Барааны Админ Самбар
@@ -153,7 +153,7 @@ export default function ProductDashboardPage() {
         {status && <p className="text-center text-red-400 mb-4">{status}</p>}
 
         {/* ── create form ─────────────────────────────── */}
-        <section className="bg-white border border-gray-300 p-4 rounded space-y-4">
+        <section className="bg-[#212121] border border-gray-300 p-4 rounded space-y-4">
           <h2 className="text-xl font-semibold">Бараа нэмэх</h2>
 
           <form
@@ -271,7 +271,7 @@ function ProductRow({
   const [salePrice, setSalePrice] = useState(product.salePrice);
 
   return (
-    <div className="bg-white border border-gray-300 p-4 rounded flex flex-col md:flex-row gap-4 items-start">
+    <div className="bg-[#212121] border border-gray-300 p-4 rounded flex flex-col md:flex-row gap-4 items-start">
       {/* thumbnail */}
       <div className="w-24 h-24 bg-gray-100 flex-shrink-0 overflow-hidden">
         {product.imageUrl ? (
