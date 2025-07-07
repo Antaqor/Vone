@@ -161,10 +161,10 @@ export default function MyOwnProfilePage() {
         : false;
 
     return (
-        <div className="min-h-screen bg-[#212121] text-black font-sans">
+        <div className="min-h-screen bg-secondary text-white">
             {/* Top Navigation */}
             <div className="fixed top-0 left-0 w-full h-12 flex items-center px-4 backdrop-blur-md z-10 bg-black/60">
-                <button onClick={() => router.back()} aria-label="Back" className="mr-2 text-black">
+                <button onClick={() => router.back()} aria-label="Back" className="mr-2 text-white">
                     &#8592;
                 </button>
                 <h1 className="font-bold flex-1 text-center">{userData.username}</h1>
@@ -250,28 +250,36 @@ export default function MyOwnProfilePage() {
             )}
 
             {/* My posts */}
-            <div className="max-w-xl mx-auto px-4 mt-4">
-                <h3 className="text-xl font-bold mb-3">Миний нийтлэлүүд</h3>
-                {loadingPosts ? (
-                    <div className="space-y-4">
-                        {Array.from({ length: 2 }).map((_, i) => (
-                            <div key={i} className="h-32 bg-gray-200 rounded animate-pulse" />
-                        ))}
-                    </div>
-                ) : userPosts.length > 0 ? (
-                    <div className="space-y-4">
-                        {userPosts.map((post) => (
-                            <HomeFeedPost
-                                key={post._id}
-                                post={post}
-                                onDelete={handleDelete}
-                                onShareAdd={handleShareAdd}
-                            />
-                        ))}
-                    </div>
-                ) : (
-                    <p className="text-gray-400">Таны нийтэлсэн пост одоогоор алга.</p>
-                )}
+            <div
+                className="mx-auto max-w-5xl w-full grid mt-4"
+                style={{
+                    gridTemplateColumns:
+                        "var(--barcelona-threadline-column-width) minmax(0, 1fr)",
+                }}
+            >
+                <main className="m-0 p-0">
+                    <h3 className="text-xl font-bold mb-3">Миний нийтлэлүүд</h3>
+                    {loadingPosts ? (
+                        <div className="space-y-4">
+                            {Array.from({ length: 2 }).map((_, i) => (
+                                <div key={i} className="h-32 bg-gray-200 rounded animate-pulse" />
+                            ))}
+                        </div>
+                    ) : userPosts.length > 0 ? (
+                        <div className="space-y-4">
+                            {userPosts.map((post) => (
+                                <HomeFeedPost
+                                    key={post._id}
+                                    post={post}
+                                    onDelete={handleDelete}
+                                    onShareAdd={handleShareAdd}
+                                />
+                            ))}
+                        </div>
+                    ) : (
+                        <p className="text-gray-400">Таны нийтэлсэн пост одоогоор алга.</p>
+                    )}
+                </main>
             </div>
             {/* Chat section removed in favor of dedicated /chat page */}
         </div>
