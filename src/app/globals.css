@@ -39,12 +39,6 @@ html.dark body {
     color: #F5F6F8;
 }
 
-html.dark input,
-html.dark textarea,
-html.dark select {
-    background-color: #1E1E1E;
-    color: #AFAFAF;
-}
 
 html.dark .bg-white {
     background-color: #212121 !important;
