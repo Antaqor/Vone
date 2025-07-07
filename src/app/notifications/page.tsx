@@ -2,10 +2,10 @@
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Link from "next/link";
 import { BASE_URL } from "../lib/config";
 import { useAuth } from "../context/AuthContext";
 import { useNotifications } from "../context/NotificationContext";
+import NotificationItem from "./NotificationItem";
 
 interface Notification {
   _id: string;
@@ -71,36 +71,9 @@ export default function NotificationsPage() {
       {notifications.length === 0 ? (
         <p>No notifications.</p>
       ) : (
-        <ul className="space-y-2">
+        <ul className="divide-y divide-white/10">
           {notifications.map((n) => (
-            <li
-              key={n._id}
-              className={`border p-2 rounded ${n.read ? "" : "bg-gray-100 dark:bg-gray-800"}`}
-            >
-              {n.type === "like" && (
-                <span>
-                  <Link href={`/profile/${n.sender?._id}`}>{n.sender?.username}</Link> liked your {" "}
-                  <Link href={`/profile/${user._id}?post=${n.post?._id}`}>post</Link>.
-                </span>
-              )}
-              {n.type === "comment" && (
-                <span>
-                  <Link href={`/profile/${n.sender?._id}`}>{n.sender?.username}</Link> commented on your {" "}
-                  <Link href={`/profile/${user._id}?post=${n.post?._id}`}>post</Link>.
-                </span>
-              )}
-              {n.type === "reply" && (
-                <span>
-                  <Link href={`/profile/${n.sender?._id}`}>{n.sender?.username}</Link> replied to your {" "}
-                  <Link href={`/profile/${user._id}?post=${n.post?._id}`}>comment</Link>.
-                </span>
-              )}
-              {n.type === "follow" && (
-                <span>
-                  <Link href={`/profile/${n.sender?._id}`}>{n.sender?.username}</Link> started following you.
-                </span>
-              )}
-            </li>
+            <NotificationItem key={n._id} notification={n} currentUserId={user._id} />
           ))}
         </ul>
       )}
