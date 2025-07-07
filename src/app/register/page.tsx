@@ -230,7 +230,7 @@ export default function RegisterMultiStepPage() {
 
     // ---------- Utility: conditional className for inputs/selects ----------
     const getInputClass = (fieldName: string) => {
-        return `w-full rounded-md px-3 py-2 text-black bg-white focus:outline-none focus:ring-2 ${
+        return `w-full rounded-md px-3 py-2 text-black bg-[#212121] focus:bg-[#323232] focus:outline-none focus:ring-2 ${
             fieldErrors[fieldName]
                 ? "border border-red-500 focus:ring-red-500"
                 : "border border-gray-300 focus:ring-brand"
@@ -239,7 +239,7 @@ export default function RegisterMultiStepPage() {
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-brand via-[#0e8386] to-backgroundDark text-white px-4 py-8">
-            <div className="w-full max-w-md space-y-6 bg-white text-black dark:bg-[#1B1B1B] dark:text-white p-8 rounded-xl shadow-lg">
+            <div className="w-full max-w-md space-y-6 bg-[#212121] text-black dark:bg-[#1B1B1B] dark:text-white p-8 rounded-xl shadow-lg">
                 {error && <p className="text-red-600">{error}</p>}
                 {success && <p className="text-green-600">{success}</p>}
 

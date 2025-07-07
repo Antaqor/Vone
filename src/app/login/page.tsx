@@ -61,7 +61,7 @@ export default function LoginPage() {
             <motion.div
                 whileHover={{ opacity: 0.97 }}
                 transition={{ duration: 0.1, ease: "easeOut" }}
-                className="w-full max-w-md space-y-6 bg-white text-black dark:bg-[#1B1B1B] dark:text-white p-8 rounded-xl shadow-lg"
+                className="w-full max-w-md space-y-6 bg-[#212121] text-black dark:bg-[#1B1B1B] dark:text-white p-8 rounded-xl shadow-lg"
             >
                 <div className="text-center space-y-1 mb-4">
                     <h2 className="text-2xl font-bold">AI Нийгмийн Сүлжээ</h2>
@@ -75,7 +75,7 @@ export default function LoginPage() {
                         </label>
                         <input
                             type="text"
-                            className="w-full border border-gray-300 rounded-lg px-4 py-3 text-black bg-white focus:outline-none focus:ring-2 focus:ring-[#30c9e8] placeholder-gray-400"
+                            className="w-full border border-gray-300 rounded-lg px-4 py-3 text-black bg-[#212121] focus:bg-[#323232] focus:outline-none focus:ring-2 focus:ring-[#30c9e8] placeholder-gray-400"
                             placeholder="Хэрэглэгчийн нэр"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
@@ -88,7 +88,7 @@ export default function LoginPage() {
                         </label>
                         <input
                             type="password"
-                            className="w-full border border-gray-300 rounded-lg px-4 py-3 text-black bg-white focus:outline-none focus:ring-2 focus:ring-[#30c9e8] placeholder-gray-400"
+                            className="w-full border border-gray-300 rounded-lg px-4 py-3 text-black bg-[#212121] focus:bg-[#323232] focus:outline-none focus:ring-2 focus:ring-[#30c9e8] placeholder-gray-400"
                             placeholder="Нууц үг"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
