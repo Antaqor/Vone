@@ -135,7 +135,7 @@ export default function PublicProfilePage() {
     const isOwnProfile = viewer?._id === userId;
 
     return (
-        <div className="min-h-screen bg-white text-black font-sans">
+        <div className="min-h-screen bg-[#212121] text-black font-sans">
             {/* Top Navigation */}
             <div className="fixed top-0 left-0 w-full h-12 flex items-center px-4 backdrop-blur-md z-10 bg-black/60">
                 <button

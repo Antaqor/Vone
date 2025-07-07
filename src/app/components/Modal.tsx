@@ -17,7 +17,7 @@ const Modal: React.FC<ModalProps> = ({ children, onClose }) => {
                 exit={{ opacity: 0 }}
             >
                 <motion.div
-                    className="bg-white square-card overflow-hidden shadow-lg max-w-lg w-full"
+                    className="bg-[#212121] square-card overflow-hidden shadow-lg max-w-lg w-full"
                     initial={{ scale: 0.8, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
                     exit={{ scale: 0.8, opacity: 0 }}

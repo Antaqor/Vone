@@ -130,7 +130,7 @@ export default function UsersPage() {
     }
 
     return (
-        <div className="min-h-screen bg-white text-black p-4">
+        <div className="min-h-screen bg-[#212121] text-black p-4">
             <h1 className="text-2xl font-bold mb-6 text-center">Гишүүд</h1>
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
                 <input
@@ -157,7 +157,7 @@ export default function UsersPage() {
                         <motion.div
                             key={user._id}
                             onClick={() => setSelectedUser(user)}
-                            className="bg-white/10 border border-gray-200 rounded-lg p-4 flex flex-col items-center shadow transition hover:shadow-lg hover:-translate-y-1 hover:ring-1 hover:ring-[#30c9e8] cursor-pointer"
+                            className="bg-[#212121] border border-gray-200 rounded-lg p-4 flex flex-col items-center shadow transition hover:bg-[#323232] hover:shadow-lg hover:-translate-y-1 hover:ring-1 hover:ring-[#30c9e8] cursor-pointer"
                         >
                             <div className="relative mb-3">
                                 {user.profilePicture ? (
