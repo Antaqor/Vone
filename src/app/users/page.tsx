@@ -3,8 +3,8 @@ import React, { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 import { BASE_URL } from "../lib/config";
-import Modal from "../components/Modal";
 
 // Helper component to count up the rating value
 const StarCount = ({ value }: { value: number }) => {
@@ -22,38 +22,6 @@ const StarCount = ({ value }: { value: number }) => {
         <span className="text-xs text-gray-500">★ {count}</span>
     );
 };
-
-// Profile modal showing more info about a user
-const UserModal = ({ user, onClose }: { user: User; onClose: () => void }) => (
-    <Modal onClose={onClose}>
-        <div className="p-6 space-y-3">
-            <div className="flex items-center gap-4">
-                {user.profilePicture ? (
-                    <Image
-                        src={`${BASE_URL}${user.profilePicture}`}
-                        alt={user.username}
-                        width={96}
-                        height={96}
-                        className="w-24 h-24 rounded-full object-cover ring-2 ring-[#30c9e8]"
-                    />
-                ) : (
-                    <div className="w-24 h-24 rounded-full bg-gray-200 ring-2 ring-[#30c9e8]" />
-                )}
-                <div>
-                    <h2 className="text-xl font-bold">{user.username}</h2>
-                    {user.location && (
-                        <p className="text-sm text-gray-500">{user.location}</p>
-                    )}
-                    {user.tagline && (
-                        <p className="text-sm text-gray-500">{user.tagline}</p>
-                    )}
-                </div>
-            </div>
-            <p className="text-sm text-gray-600">Rating: {user.rating || 0}</p>
-            <p className="text-sm text-gray-600">Full profile info coming soon...</p>
-        </div>
-    </Modal>
-);
 
 interface User {
     _id: string;
@@ -82,7 +50,7 @@ export default function UsersPage() {
     const [error, setError] = useState("");
     const [search, setSearch] = useState("");
     const [sort, setSort] = useState("active");
-    const [selectedUser, setSelectedUser] = useState<User | null>(null);
+    const router = useRouter();
 
     useEffect(() => {
         const fetchUsers = async () => {
@@ -156,7 +124,7 @@ export default function UsersPage() {
                     return (
                         <motion.div
                             key={user._id}
-                            onClick={() => setSelectedUser(user)}
+                            onClick={() => router.push(`/profile/${user._id}`)}
                             className="bg-[#212121] border border-gray-200 rounded-lg p-4 flex flex-col items-center shadow transition hover:bg-[#323232] hover:shadow-lg hover:-translate-y-1 hover:ring-1 hover:ring-[#30c9e8] cursor-pointer"
                         >
                             <div className="relative mb-3">
@@ -189,9 +157,6 @@ export default function UsersPage() {
                     );
                 })}
             </div>
-            {selectedUser && (
-                <UserModal user={selectedUser} onClose={() => setSelectedUser(null)} />
-            )}
         </div>
     );
 }
