@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { UserCircleIcon } from "@heroicons/react/24/solid";
 import {
     HomeIcon,
@@ -16,6 +17,7 @@ import { BASE_URL } from "../lib/config";
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const { loggedIn, logout, user } = useAuth();
+    const pathname = usePathname();
     const isPro =
         user?.subscriptionExpiresAt &&
         new Date(user.subscriptionExpiresAt) > new Date();
@@ -66,9 +68,11 @@ export default function Header() {
                                 )}
                             </Link>
                         ) : (
-                            <Link href="/login" aria-label="Login">
-                                <UserCircleIcon className="w-8 h-8 text-brand" />
-                            </Link>
+                            pathname !== "/login" && pathname !== "/register" && (
+                                <Link href="/login" aria-label="Login">
+                                    <UserCircleIcon className="w-8 h-8 text-brand" />
+                                </Link>
+                            )
                         )}
                         <div className="hidden md:flex items-center space-x-8 font-medium">
                             {loggedIn ? (
