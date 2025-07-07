@@ -258,7 +258,7 @@ export default function MyOwnProfilePage() {
                 }}
             >
                 <main className="m-0 p-0">
-                    <h3 className="text-xl font-bold mb-3">Миний нийтлэлүүд</h3>
+                    <h3 className="text-xl font-bold mb-3 ml-2">Миний нийтлэлүүд</h3>
                     {loadingPosts ? (
                         <div className="space-y-4">
                             {Array.from({ length: 2 }).map((_, i) => (
