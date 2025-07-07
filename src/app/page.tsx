@@ -11,10 +11,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useAuth } from "./context/AuthContext";
-import {
-  HeartIcon as HeartSolid,
-  BoltIcon,
-} from "@heroicons/react/24/solid";
+import { HeartIcon as HeartSolid } from "@heroicons/react/24/solid";
 import {
   HeartIcon as HeartOutline,
   ChatBubbleOvalLeftIcon,
@@ -307,42 +304,6 @@ export default function HomePage() {
   };
 
 
-  const handleFollow = async (targetId: string) => {
-    if (!user?.accessToken) return;
-    try {
-      await axios.post(
-        `${BASE_URL}/api/users/${targetId}/follow`,
-        {},
-        { headers: { Authorization: `Bearer ${user.accessToken}` } }
-      );
-      login(
-        { ...user, following: [...(user.following || []), targetId] },
-        user.accessToken
-      );
-    } catch (err) {
-      console.error("Follow error:", err);
-    }
-  };
-
-  const handleUnfollow = async (targetId: string) => {
-    if (!user?.accessToken) return;
-    try {
-      await axios.post(
-        `${BASE_URL}/api/users/${targetId}/unfollow`,
-        {},
-        { headers: { Authorization: `Bearer ${user.accessToken}` } }
-      );
-      login(
-        {
-          ...user,
-          following: (user.following || []).filter((id) => id !== targetId),
-        },
-        user.accessToken
-      );
-    } catch (err) {
-      console.error("Unfollow error:", err);
-    }
-  };
 
   const toggleComments = (postId: string) =>
     setOpenComments((prev) => ({ ...prev, [postId]: !prev[postId] }));
@@ -430,25 +391,7 @@ export default function HomePage() {
                             </span>
                           </Link>
 
-                          {postUser && user && user._id !== postUser._id && (
-                            <div>
-                              {user.following?.includes(postUser._id) ? (
-                                <button
-                                  onClick={() => handleUnfollow(postUser._id)}
-                                  className="text-green-600 text-xs"
-                                >
-                                  Unfollow
-                                </button>
-                              ) : (
-                                <button
-                                  onClick={() => handleFollow(postUser._id)}
-                                  className="text-brand text-xs"
-                                >
-                                  Follow
-                                </button>
-                              )}
-                            </div>
-                          )}
+                          {/* follow/unfollow buttons removed */}
                           {postUser && user && user._id === postUser._id && (
                             <div className="ml-auto relative">
                               <button
@@ -494,7 +437,6 @@ export default function HomePage() {
                         <span className="text-xs text-gray-500">
                           {formatPostDate(post.createdAt)}
                         </span>
-                        <BoltIcon className="w-3 h-3 text-green-400 ml-1 inline" />
 
                         {/* Content */}
                         {post.sharedFrom && (
