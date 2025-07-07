@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { HeartIcon as HeartSolid, BoltIcon } from "@heroicons/react/24/solid";
+import { HeartIcon as HeartSolid } from "@heroicons/react/24/solid";
 import {
   HeartIcon as HeartOutline,
   ChatBubbleOvalLeftIcon,
@@ -167,17 +167,6 @@ export default function HomeFeedPost({ post, onDelete, onShareAdd }: Props) {
       animate={{ opacity: 1, y: 0 }}
       className="bg-[#212121] p-6 grid gap-4 border-b-0 sm:border-b sm:border-gray-200 dark:bg-[#2a2a2a] sm:dark:border-gray-700 dark:text-white"
     >
-      {postUser?.coverImage && (
-        <div className="relative w-full h-32 rounded-md overflow-hidden mb-4">
-          <Image
-            src={`${BASE_URL}${postUser.coverImage}`}
-            alt="Cover"
-            fill
-            className="object-cover"
-            onError={(e) => (e.currentTarget.style.display = 'none')}
-          />
-        </div>
-      )}
       <div className="grid grid-cols-[auto,1fr] gap-5 group">
         {/* Avatar */}
         <div className="self-start">
@@ -247,7 +236,6 @@ export default function HomeFeedPost({ post, onDelete, onShareAdd }: Props) {
           <span className="text-xs text-gray-500">
             {formatPostDate(postState.createdAt)}
           </span>
-          <BoltIcon className="w-3 h-3 text-green-400 ml-1 inline" />
           {postState.sharedFrom && (
             <p className="text-xs text-gray-500">Shared from {postState.sharedFrom.user?.username}</p>
           )}
