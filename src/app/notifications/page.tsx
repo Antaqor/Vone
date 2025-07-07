@@ -73,7 +73,11 @@ export default function NotificationsPage() {
       ) : (
         <ul className="divide-y divide-white/10">
           {notifications.map((n) => (
-            <NotificationItem key={n._id} notification={n} currentUserId={user._id} />
+            <NotificationItem
+              key={n._id}
+              notification={n}
+              currentUserId={user._id || ""}
+            />
           ))}
         </ul>
       )}
