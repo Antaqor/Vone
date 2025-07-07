@@ -37,7 +37,11 @@ export default function Header() {
             >
                 {/* NAV BAR */}
                 <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center">
-                    <Link href="/" className="flex items-center" aria-label="Home">
+                    <Link
+                        href="/"
+                        className="hidden md:flex items-center"
+                        aria-label="Home"
+                    >
                         <Image
                             src="/logo.png"
                             alt="Vone logo"
