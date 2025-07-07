@@ -7,6 +7,7 @@ This document describes the UX/UI specifications for the `Classroom` page. The g
 - **Sidebar sizing**: width `w-64` (16rem) on mobile and `w-80` (20rem) for `md` and up.
 - **Spacing**: padding inside the sidebar is `p-6`. Main content has `p-4` on mobile and `p-10` on `md` and above.
 - **Sidebar toggle**: A hamburger button (`Bars3Icon`) positioned `top-2 left-2` opens the sidebar on mobile. A close button (`XMarkIcon`) inside the sidebar at `top-2 right-2` hides it.
+- **Layering**: Both the toggle button and sidebar use a z-index above the header (`z-[1000]`) so they remain clickable on small screens.
 
 ## Colors
 - **Brand color**: `#119C99` (`bg-brand` in Tailwind config).
