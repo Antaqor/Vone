@@ -30,7 +30,7 @@ function NotificationNavItem() {
       >
         <BellIcon className="w-6 h-6 group-hover:text-brand" />
         <span className="flex items-center">
-          Notifications
+          Мэдэгдэл
           {unreadCount > 0 && (
             <span className="ml-1 bg-red-500 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center">
               {unreadCount}
