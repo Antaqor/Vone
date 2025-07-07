@@ -31,36 +31,39 @@ export default function NotificationItem({ notification, currentUserId }: Props)
     if (notification.type === "like") {
       return (
         <span>
-          {userLink} liked your {" "}
+          {userLink} таны бичлэгт {" "}
           <Link href={`/profile/${currentUserId}?post=${notification.post?._id}`} className="hover:underline">
-            post
-          </Link>.
+            бичлэг
+          </Link>
+          д лайк дарлаа.
         </span>
       );
     }
     if (notification.type === "comment") {
       return (
         <span>
-          {userLink} commented on your {" "}
+          {userLink} таны {" "}
           <Link href={`/profile/${currentUserId}?post=${notification.post?._id}`} className="hover:underline">
-            post
-          </Link>.
+            бичлэг
+          </Link>
+          д сэтгэгдэл үлдээв.
         </span>
       );
     }
     if (notification.type === "reply") {
       return (
         <span>
-          {userLink} replied to your {" "}
+          {userLink} таны {" "}
           <Link href={`/profile/${currentUserId}?post=${notification.post?._id}`} className="hover:underline">
-            comment
-          </Link>.
+            сэтгэгдэл
+          </Link>
+          д хариу бичлээ.
         </span>
       );
     }
     return (
       <span>
-        {userLink} started following you.
+        {userLink} таныг дагаж эхэллээ.
       </span>
     );
   };
@@ -80,9 +83,8 @@ export default function NotificationItem({ notification, currentUserId }: Props)
 
   return (
     <li
-      className={`flex items-start gap-3 px-4 py-3 border-b border-white/10 ${
-        notification.read ? "" : "bg-gray-100 dark:bg-gray-800"
-      }`}
+      className={`flex items-start gap-4 px-4 py-3 border-b border-white/10 transition-colors
+        ${notification.read ? "hover:bg-gray-50 dark:hover:bg-gray-900" : "bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700"}`}
     >
       {sender?.profilePicture ? (
         <Image
@@ -90,10 +92,10 @@ export default function NotificationItem({ notification, currentUserId }: Props)
           alt={sender.username}
           width={40}
           height={40}
-          className="w-10 h-10 rounded-full object-cover"
+          className="w-10 h-10 object-cover"
         />
       ) : (
-        <div className="w-10 h-10 rounded-full bg-gray-300" />
+        <div className="w-10 h-10 bg-gray-300" />
       )}
       <div className="flex-1 text-sm leading-snug">
         <div className="flex items-center gap-1">
