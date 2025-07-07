@@ -36,10 +36,10 @@ function AuthGuard({ children }: { children: React.ReactNode }) {
     if (!loading && !loggedIn && !publicPaths.some((p) => pathname.startsWith(p))) {
       setShowPrompt(true);
       timerRef.current = setTimeout(() => router.push("/login"), 1500);
-      return () => {
-        if (timerRef.current) clearTimeout(timerRef.current);
-      };
     }
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
   }, [loading, loggedIn, pathname, router]);
 
   const handleClosePrompt = () => {
@@ -48,14 +48,15 @@ function AuthGuard({ children }: { children: React.ReactNode }) {
     router.push("/login");
   };
 
-  return (
-    <>
-      {children}
-      {showPrompt && (
-        <LoginRequiredPopup onClose={handleClosePrompt} />
-      )}
-    </>
-  );
+  if (loading) {
+    return <LoadingOverlay />;
+  }
+
+  if (showPrompt) {
+    return <LoginRequiredPopup onClose={handleClosePrompt} />;
+  }
+
+  return <>{children}</>;
 }
 
 function NotificationNavItem() {
