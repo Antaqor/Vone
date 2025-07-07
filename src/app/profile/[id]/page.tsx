@@ -230,7 +230,7 @@ export default function PublicProfilePage() {
                             Энэ хэрэглэгч нийтлэлгүй байна.
                         </p>
                     )}
-                    <div className="space-y-4">
+                    <div className="flex flex-col gap-4">
                         {userPosts.map((post) => (
                             <HomeFeedPost
                                 key={post._id}
