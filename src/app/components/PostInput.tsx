@@ -2,7 +2,7 @@
 
 import React, { useRef, useState, useEffect } from "react";
 import Image from "next/image";
-import { PhotoIcon, ChartBarIcon } from "@heroicons/react/24/outline";
+import { PhotoIcon } from "@heroicons/react/24/outline";
 import { useAuth } from "../context/AuthContext";
 import axios from "axios";
 import { BASE_URL } from "../lib/config";
@@ -121,9 +121,6 @@ export default function PostInput({ onPost }: Props) {
           <div className="flex gap-3 text-gray-400">
             <button type="button" onClick={triggerFileInput} aria-label="Add image">
               <PhotoIcon className="w-6 h-6 icon-hover-brand" />
-            </button>
-            <button type="button" aria-label="Add poll">
-              <ChartBarIcon className="w-6 h-6 icon-hover-brand" />
             </button>
           </div>
           <div className="flex items-center gap-2">
