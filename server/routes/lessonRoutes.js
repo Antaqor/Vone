@@ -21,11 +21,12 @@ router.post('/', authenticateToken, async (req, res) => {
     return res.status(403).json({ error: 'Forbidden' });
   }
   try {
-    const { url, title, description } = req.body;
+    const { url, title, description, folder } = req.body;
     const lesson = await Lesson.create({
       url,
       title,
       description,
+      folder,
       author: req.user._id,
     });
     await lesson.populate('author', 'username');
@@ -41,10 +42,10 @@ router.put('/:id', authenticateToken, async (req, res) => {
     return res.status(403).json({ error: 'Forbidden' });
   }
   try {
-    const { url, title, description } = req.body;
+    const { url, title, description, folder } = req.body;
     const lesson = await Lesson.findByIdAndUpdate(
       req.params.id,
-      { url, title, description },
+      { url, title, description, folder },
       { new: true }
     );
     if (!lesson) return res.status(404).json({ error: 'Lesson not found' });
