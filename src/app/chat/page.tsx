@@ -115,14 +115,6 @@ export default function ChatPage() {
         {activeConv && (
           <ChatWindow chatId={activeConv.id} user={activeConv.user} onBack={() => setActive(null)} />
         )}
-        {loggedIn && (
-          <button
-            className="fixed bottom-4 right-4 bg-brand text-white w-12 h-12 rounded-full shadow-lg"
-            aria-label="New Message"
-          >
-            +
-          </button>
-        )}
       </div>
     </div>
   );
