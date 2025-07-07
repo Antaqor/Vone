@@ -135,13 +135,13 @@ export default function PublicProfilePage() {
     const isOwnProfile = viewer?._id === userId;
 
     return (
-        <div className="min-h-screen bg-[#212121] text-black font-sans">
+        <div className="min-h-screen bg-secondary text-white">
             {/* Top Navigation */}
             <div className="fixed top-0 left-0 w-full h-12 flex items-center px-4 backdrop-blur-md z-10 bg-black/60">
                 <button
                     onClick={() => router.back()}
                     aria-label="Back"
-                    className="mr-2 text-black"
+                    className="mr-2 text-white"
                 >
                     &#8592;
                 </button>
@@ -213,25 +213,33 @@ export default function PublicProfilePage() {
             </div>
 
             {/* Posts Section */}
-            <div className="w-full max-w-xl mt-8 px-4">
-                <h2 className="text-xl font-semibold mb-4">Нийтлэлүүд</h2>
-                {postLoading && (
-                    <p className="text-gray-400 mb-2">Ачааллаж байна...</p>
-                )}
-                {!postLoading && userPosts.length === 0 && (
-                    <p className="text-gray-400">
-                        Энэ хэрэглэгч нийтлэлгүй байна.
-                    </p>
-                )}
-                <div className="space-y-4">
-                    {userPosts.map((post) => (
-                        <HomeFeedPost
-                            key={post._id}
-                            post={post}
-                            onShareAdd={handleShareAdd}
-                        />
-                    ))}
-                </div>
+            <div
+                className="mx-auto max-w-5xl w-full grid mt-8"
+                style={{
+                    gridTemplateColumns:
+                        "var(--barcelona-threadline-column-width) minmax(0, 1fr)",
+                }}
+            >
+                <main className="m-0 p-0">
+                    <h2 className="text-xl font-semibold mb-4">Нийтлэлүүд</h2>
+                    {postLoading && (
+                        <p className="text-gray-400 mb-2">Ачааллаж байна...</p>
+                    )}
+                    {!postLoading && userPosts.length === 0 && (
+                        <p className="text-gray-400">
+                            Энэ хэрэглэгч нийтлэлгүй байна.
+                        </p>
+                    )}
+                    <div className="space-y-4">
+                        {userPosts.map((post) => (
+                            <HomeFeedPost
+                                key={post._id}
+                                post={post}
+                                onShareAdd={handleShareAdd}
+                            />
+                        ))}
+                    </div>
+                </main>
             </div>
         </div>
     );
