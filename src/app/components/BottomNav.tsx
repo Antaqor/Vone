@@ -54,7 +54,7 @@ const BottomNav: React.FC = () => {
                 {/* NOTIFICATIONS */}
                 <button
                     onClick={() => router.push("/notifications")}
-                    aria-label="Notifications"
+                    aria-label="Мэдэгдэл"
                     className="relative p-1 text-white hover:text-brand"
                 >
                     <BellIcon className="h-7 w-7 icon-hover-brand" />
