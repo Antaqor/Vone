@@ -13,8 +13,10 @@ import {
   XMarkIcon,
   PencilSquareIcon,
   TrashIcon,
+  FolderIcon,
+  ChevronDownIcon,
 } from '@heroicons/react/24/outline';
-import { CheckIcon, BookOpenIcon } from '@heroicons/react/24/solid';
+import { CheckIcon, Squares2X2Icon } from '@heroicons/react/24/solid';
 import { useAuth } from '../context/AuthContext';
 import { BASE_URL } from '../lib/config';
 
@@ -23,6 +25,7 @@ interface Lesson {
   url: string;
   title: string;
   description?: string;
+  folder?: string;
   completed?: boolean;
   author?: { username: string };
 }
@@ -42,8 +45,10 @@ export default function ClassroomPage() {
   const [newTitle, setNewTitle] = useState('');
   const [newUrl, setNewUrl] = useState('');
   const [newDesc, setNewDesc] = useState('');
+  const [newFolder, setNewFolder] = useState('General');
   const [editing, setEditing] = useState<Lesson | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [openFolders, setOpenFolders] = useState<Record<string, boolean>>({});
 
   // Fetch lessons
   useEffect(() => {
@@ -60,27 +65,33 @@ export default function ClassroomPage() {
     fetchLessons();
   }, []);
 
-  const validForm = newUrl.trim() && newTitle.trim() && newDesc.trim();
-  const progress = (['url', 'title', 'desc'] as const).reduce((acc, field) => {
-    if (field === 'url' && newUrl.trim()) return acc + 1;
-    if (field === 'title' && newTitle.trim()) return acc + 1;
-    if (field === 'desc' && newDesc.trim()) return acc + 1;
-    return acc;
-  }, 0);
-  const progressPct = (progress / 3) * 100;
+  const validForm =
+    newUrl.trim() && newTitle.trim() && newDesc.trim() && newFolder.trim();
+  const progress = (['url', 'title', 'desc', 'folder'] as const).reduce(
+    (acc, field) => {
+      if (field === 'url' && newUrl.trim()) return acc + 1;
+      if (field === 'title' && newTitle.trim()) return acc + 1;
+      if (field === 'desc' && newDesc.trim()) return acc + 1;
+      if (field === 'folder' && newFolder.trim()) return acc + 1;
+      return acc;
+    },
+    0
+  );
+  const progressPct = (progress / 4) * 100;
 
   const addLesson = async () => {
     if (!user?.accessToken || !validForm) return;
     try {
       const { data } = await axios.post<Lesson>(
         `${BASE_URL}/api/lessons`,
-        { url: newUrl, title: newTitle, description: newDesc },
+        { url: newUrl, title: newTitle, description: newDesc, folder: newFolder },
         { headers: { Authorization: `Bearer ${user.accessToken}` } }
       );
       setLessons((prev) => [...prev, { ...data, completed: false }]);
       setNewTitle('');
       setNewUrl('');
       setNewDesc('');
+      setNewFolder('General');
       setSelected(data);
     } catch (err) {
       console.error('Add lesson error:', err);
@@ -92,7 +103,7 @@ export default function ClassroomPage() {
     try {
       const { data } = await axios.put<Lesson>(
         `${BASE_URL}/api/lessons/${editing._id}`,
-        { url: newUrl, title: newTitle, description: newDesc },
+        { url: newUrl, title: newTitle, description: newDesc, folder: newFolder },
         { headers: { Authorization: `Bearer ${user.accessToken}` } }
       );
       setLessons((prev) => prev.map((l) => (l._id === data._id ? { ...data, completed: l.completed } : l)));
@@ -101,6 +112,7 @@ export default function ClassroomPage() {
       setNewTitle('');
       setNewUrl('');
       setNewDesc('');
+      setNewFolder('General');
     } catch (err) {
       console.error('Save lesson error:', err);
     }
@@ -123,10 +135,12 @@ export default function ClassroomPage() {
     setLessons((prev) => prev.map((l) => (l._id === id ? { ...l, completed: !l.completed } : l)));
   };
 
+  const folders = Array.from(new Set(lessons.map((l) => l.folder || 'General')));
+
   return (
     <div className="flex flex-col md:flex-row min-h-screen text-black">
       <button
-        className="md:hidden absolute top-2 left-2 z-[1000] p-2 bg-[#212121] hover:bg-[#323232] rounded-full shadow"
+        className="md:hidden absolute top-2 left-2 z-[1000] p-2 bg-[#1b1b1b] hover:bg-[#323232] rounded-full shadow"
         onClick={() => setSidebarOpen(true)}
         aria-label="Open lessons"
       >
@@ -136,7 +150,7 @@ export default function ClassroomPage() {
         <div className="fixed inset-0 bg-black/40 z-10 md:hidden" onClick={() => setSidebarOpen(false)} />
       )}
       <aside
-        className={`bg-[#212121] p-6 border-r border-gray-200 overflow-y-auto md:h-screen md:sticky md:top-0 fixed inset-y-0 left-0 z-[1000] w-64 md:w-80 transform transition-transform ${sidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}`}
+        className={`bg-[#1b1b1b] p-6 border-r border-gray-200 overflow-y-auto md:h-screen md:sticky md:top-0 fixed inset-y-0 left-0 z-[1000] w-64 md:w-80 transform transition-transform ${sidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}`}
       >
         <button
           className="md:hidden absolute top-2 right-2 p-1 z-[1001]"
@@ -146,11 +160,11 @@ export default function ClassroomPage() {
           <XMarkIcon className="w-5 h-5 text-gray-600" />
         </button>
         <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
-          <BookOpenIcon className="w-6 h-6" /> Classroom
+          <Squares2X2Icon className="w-6 h-6" /> Classroom
         </h2>
 
         {isAdmin && (
-          <div className="bg-[#212121] shadow rounded-lg p-3 mb-4">
+          <div className="bg-[#1b1b1b] shadow rounded-lg p-3 mb-4">
             <div className="h-2 bg-gray-200 rounded mb-3 overflow-hidden">
               <div
                 className="h-full bg-green-500 transition-all"
@@ -169,6 +183,13 @@ export default function ClassroomPage() {
               placeholder="Lesson title"
               value={newTitle}
               onChange={(e) => setNewTitle(e.target.value)}
+              className="w-full border p-2 rounded mb-2 focus:ring"
+            />
+            <input
+              type="text"
+              placeholder="Folder"
+              value={newFolder}
+              onChange={(e) => setNewFolder(e.target.value)}
               className="w-full border p-2 rounded mb-2 focus:ring"
             />
             <textarea
@@ -204,6 +225,7 @@ export default function ClassroomPage() {
                   setNewTitle('');
                   setNewUrl('');
                   setNewDesc('');
+                  setNewFolder('General');
                 }}
                 className="w-full mt-2 py-2 rounded bg-gray-200"
               >
@@ -213,43 +235,65 @@ export default function ClassroomPage() {
           </div>
         )}
 
-        <div className="space-y-2">
+        <div className="space-y-4">
           {lessons.length === 0 && (
             <p className="text-center text-gray-500">No lessons yet. Start by adding one!</p>
           )}
-          {lessons.map((lesson) => (
-            <div
-              key={lesson._id}
-              className={`flex items-center p-2 rounded shadow cursor-pointer hover:bg-[#323232] ${selected && selected._id === lesson._id ? 'bg-[#323232]' : 'bg-[#212121]'}`}
-              onClick={() => setSelected(lesson)}
-            >
-              <CheckIcon
-                className={`w-5 h-5 mr-2 ${lesson.completed ? 'text-green-500' : 'text-gray-400'}`}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  toggleCompleted(lesson._id);
-                }}
-              />
-              <span className="flex-1 truncate font-medium">{lesson.title}</span>
-              {isAdmin && (
-                <div className="flex items-center gap-2">
-                  <PencilSquareIcon
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setEditing(lesson);
-                      setNewTitle(lesson.title);
-                      setNewUrl(lesson.url);
-                      setNewDesc(lesson.description || '');
-                    }}
-                    className="w-5 h-5 text-cyan-400 cursor-pointer"
-                  />
-                  <TrashIcon
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      deleteLesson(lesson._id);
-                    }}
-                    className="w-5 h-5 text-red-500 cursor-pointer"
-                  />
+          {folders.map((folder) => (
+            <div key={folder} className="bg-[#1b1b1b] rounded">
+              <div
+                className="flex items-center justify-between p-2 cursor-pointer hover:bg-[#323232]"
+                onClick={() => setOpenFolders((o) => ({ ...o, [folder]: !o[folder] }))}
+              >
+                <span className="flex items-center gap-2 font-semibold">
+                  <FolderIcon className="w-5 h-5" /> {folder}
+                </span>
+                <ChevronDownIcon
+                  className={`w-4 h-4 transition-transform ${openFolders[folder] ? 'rotate-180' : ''}`}
+                />
+              </div>
+              {openFolders[folder] && (
+                <div className="space-y-2 p-2">
+                  {lessons
+                    .filter((l) => (l.folder || 'General') === folder)
+                    .map((lesson) => (
+                      <div
+                        key={lesson._id}
+                        className={`flex items-center p-2 rounded shadow cursor-pointer hover:bg-[#323232] ${selected && selected._id === lesson._id ? 'bg-[#323232]' : 'bg-[#1b1b1b]'}`}
+                        onClick={() => setSelected(lesson)}
+                      >
+                        <CheckIcon
+                          className={`w-5 h-5 mr-2 ${lesson.completed ? 'text-green-500' : 'text-gray-400'}`}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            toggleCompleted(lesson._id);
+                          }}
+                        />
+                        <span className="flex-1 truncate font-medium">{lesson.title}</span>
+                        {isAdmin && (
+                          <div className="flex items-center gap-2">
+                            <PencilSquareIcon
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setEditing(lesson);
+                                setNewTitle(lesson.title);
+                                setNewUrl(lesson.url);
+                                setNewDesc(lesson.description || '');
+                                setNewFolder(lesson.folder || 'General');
+                              }}
+                              className="w-5 h-5 text-cyan-400 cursor-pointer"
+                            />
+                            <TrashIcon
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                deleteLesson(lesson._id);
+                              }}
+                              className="w-5 h-5 text-red-500 cursor-pointer"
+                            />
+                          </div>
+                        )}
+                      </div>
+                    ))}
                 </div>
               )}
             </div>
