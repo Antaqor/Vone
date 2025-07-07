@@ -11,7 +11,7 @@ import {
   HomeIcon,
   UserGroupIcon,
   AcademicCapIcon,
-  ChatBubbleLeftRightIcon,
+  ChatBubbleOvalLeftEllipsisIcon,
 } from "@heroicons/react/24/outline";
 import Header from "./Header";
 import BottomNav from "./BottomNav";
@@ -106,7 +106,7 @@ export default function LayoutClient({ children }: { children: React.ReactNode }
                       href="/chat"
                       className="group flex items-center gap-2 p-4 pl-0 text-xl font-semibold text-gray-700 transition-smooth focus:outline-none hover:text-brand focus:ring-2 focus:ring-brand"
                     >
-                      <ChatBubbleLeftRightIcon className="w-6 h-6 group-hover:text-brand" />
+                      <ChatBubbleOvalLeftEllipsisIcon className="w-6 h-6 group-hover:text-brand" />
                       <span>Чат</span>
                     </Link>
                   </li>

@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { PaperAirplaneIcon } from "@heroicons/react/24/solid";
 import useChat, { ChatMessage } from "../../hooks/useChat";
 import { BASE_URL } from "../../lib/config";
 
@@ -132,14 +131,13 @@ export default function ChatWindow({ chatId, user, onBack }: ChatWindowProps) {
           className="w-full border rounded p-2 resize-none"
           placeholder="Type a message"
         />
-        <div className="flex justify-between items-center">
-          <button onClick={() => setText((t) => t + "\u{1F642}")}>🙂</button>
+        <div className="flex justify-end">
           <button
             onClick={handleSend}
             aria-label="Send message"
-            className="bg-brand text-white p-3 rounded-full ml-2 shadow-md hover:opacity-90"
+            className="bg-brand text-white px-4 py-2 rounded ml-2 shadow-md hover:opacity-90"
           >
-            <PaperAirplaneIcon className="w-6 h-6 -rotate-45" />
+            Send
           </button>
         </div>
       </div>

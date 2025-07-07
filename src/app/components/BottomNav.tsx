@@ -6,7 +6,7 @@ import {
     HomeIcon,
     BellIcon,
     AcademicCapIcon,
-    ChatBubbleLeftRightIcon,
+    ChatBubbleOvalLeftEllipsisIcon,
 } from "@heroicons/react/24/outline";
 import { useNotifications } from "../context/NotificationContext";
 
@@ -71,7 +71,7 @@ const BottomNav: React.FC = () => {
                     aria-label="Chat"
                     className="p-1 text-white hover:text-brand"
                 >
-                    <ChatBubbleLeftRightIcon className="h-7 w-7 icon-hover-brand" />
+                    <ChatBubbleOvalLeftEllipsisIcon className="h-7 w-7 icon-hover-brand" />
                 </button>
 
                 {/* CLASSROOM */}
