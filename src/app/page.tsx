@@ -558,7 +558,7 @@ export default function HomePage() {
                                   <input
                                     type="text"
                                     placeholder="Reply..."
-                                    className="flex-1 text-xs border border-gray-300 rounded p-1"
+                                    className="w-full max-w-full flex-1 text-xs bg-[#f5f6fa] text-[#111] placeholder-[#9ca3af] border border-[#e5e7eb] rounded-[6px] py-[6px] px-[10px] focus:outline-none focus:ring-2 focus:ring-[#3b82f6]"
                                     value={replyTexts[comment._id] || ""}
                                     onChange={(e) =>
                                       setReplyTexts((prev) => ({
