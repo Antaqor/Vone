@@ -12,7 +12,6 @@ import {
 import {
   BellIcon,
   HomeIcon,
-  UserGroupIcon,
   AcademicCapIcon,
   ChatBubbleOvalLeftEllipsisIcon,
 } from "@heroicons/react/24/outline";
@@ -124,15 +123,6 @@ export default function LayoutClient({
                           >
                             <HomeIcon className="w-6 h-6 group-hover:text-brand" />
                             <span>Нүүр</span>
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            href="/users"
-                            className="group flex items-center gap-2 p-4 pl-0 text-xl font-semibold text-gray-700 transition-smooth focus:outline-none hover:text-brand focus:ring-2 focus:ring-brand"
-                          >
-                            <UserGroupIcon className="w-6 h-6 group-hover:text-brand" />
-                            <span>Гишүүд</span>
                           </Link>
                         </li>
                         <li>
