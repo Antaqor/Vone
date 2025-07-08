@@ -140,7 +140,7 @@ export default function ClassroomPage() {
   return (
     <div className="flex flex-col md:flex-row min-h-screen text-black">
       <button
-        className="md:hidden absolute top-2 left-2 z-[1000] p-2 bg-[#1b1b1b] hover:bg-[#323232] rounded-full shadow"
+        className="md:hidden absolute top-2 left-2 z-[1000] p-2 bg-[#111111] hover:bg-[#323232] rounded-full shadow"
         onClick={() => setSidebarOpen(true)}
         aria-label="Open lessons"
       >
@@ -150,7 +150,7 @@ export default function ClassroomPage() {
         <div className="fixed inset-0 bg-black/40 z-10 md:hidden" onClick={() => setSidebarOpen(false)} />
       )}
       <aside
-        className={`bg-[#1b1b1b] p-6 border-r border-gray-200 overflow-y-auto md:h-screen md:sticky md:top-0 fixed inset-y-0 left-0 z-[1000] w-64 md:w-80 transform transition-transform ${sidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}`}
+        className={`bg-[#111111] p-6 border-r border-gray-200 overflow-y-auto md:h-screen md:sticky md:top-0 fixed inset-y-0 left-0 z-[1000] w-64 md:w-80 transform transition-transform ${sidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}`}
       >
         <button
           className="md:hidden absolute top-2 right-2 p-1 z-[1001]"
@@ -164,7 +164,7 @@ export default function ClassroomPage() {
         </h2>
 
         {isAdmin && (
-          <div className="bg-[#1b1b1b] shadow rounded-lg p-3 mb-4">
+          <div className="bg-[#111111] shadow rounded-lg p-3 mb-4">
             <div className="h-2 bg-gray-200 rounded mb-3 overflow-hidden">
               <div
                 className="h-full bg-green-500 transition-all"
@@ -240,7 +240,7 @@ export default function ClassroomPage() {
             <p className="text-center text-gray-500">No lessons yet. Start by adding one!</p>
           )}
           {folders.map((folder) => (
-            <div key={folder} className="bg-[#1b1b1b] rounded">
+            <div key={folder} className="bg-[#111111] rounded">
               <div
                 className="flex items-center justify-between p-2 cursor-pointer hover:bg-[#323232]"
                 onClick={() => setOpenFolders((o) => ({ ...o, [folder]: !o[folder] }))}
@@ -259,7 +259,7 @@ export default function ClassroomPage() {
                     .map((lesson) => (
                       <div
                         key={lesson._id}
-                        className={`flex items-center p-2 rounded shadow cursor-pointer hover:bg-[#323232] ${selected && selected._id === lesson._id ? 'bg-[#323232]' : 'bg-[#1b1b1b]'}`}
+                        className={`flex items-center p-2 rounded shadow cursor-pointer hover:bg-[#323232] ${selected && selected._id === lesson._id ? 'bg-[#323232]' : 'bg-[#111111]'}`}
                         onClick={() => setSelected(lesson)}
                       >
                         <CheckIcon

@@ -89,7 +89,7 @@ const FAQSection = () => {
     };
 
     return (
-        <div className="w-full bg-[#212121] py-14 px-4">
+        <div className="w-full bg-[#111111] py-14 px-4">
             {/* Title & Subtitle */}
             <motion.div
                 initial={{ opacity: 0, y: 20 }}

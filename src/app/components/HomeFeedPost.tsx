@@ -165,7 +165,7 @@ export default function HomeFeedPost({ post, onDelete, onShareAdd }: Props) {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-[#212121] p-6 grid gap-4 dark:bg-[#2a2a2a] dark:text-white"
+      className="bg-[#111111] p-6 grid gap-4 dark:bg-[#111111] dark:text-white"
     >
       <div className="grid grid-cols-[auto,1fr] gap-5 group">
         {/* Avatar */}
