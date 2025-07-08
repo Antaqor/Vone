@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 import { UserCircleIcon } from "@heroicons/react/24/solid";
 import {
     HomeIcon,
-    UserGroupIcon,
     AcademicCapIcon,
     BellIcon,
     ChatBubbleOvalLeftEllipsisIcon,
@@ -245,16 +244,6 @@ export default function Header() {
                                             </Link>
                                         </li>
                                     )}
-                                    <li>
-                                        <Link
-                                            href="/users"
-                                            onClick={() => setIsMenuOpen(false)}
-                                            className="flex items-center gap-2 hover:text-brand"
-                                        >
-                                            <UserGroupIcon className="w-6 h-6" />
-                                            Гишүүд
-                                        </Link>
-                                    </li>
                                     <li>
                                         <Link
                                             href="/classroom"
