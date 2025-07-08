@@ -88,6 +88,7 @@ export default function LayoutClient({
   const pathname = usePathname();
   const isWidePage =
       pathname.startsWith("/dashboard") || pathname.startsWith("/classroom");
+  const isChatPage = pathname.startsWith("/chat");
 
   useEffect(() => {
     const timer = setTimeout(() => setMountLoading(false), 500);
@@ -147,14 +148,16 @@ export default function LayoutClient({
                       </nav>
                     </aside>
                     <div
-                        className={`w-full ${isWidePage ? "md:w-full" : "md:w-1/2 md:border-r md:border-supportBorder"}`}
+                        className={`w-full ${isWidePage ? "md:w-full" : isChatPage ? "md:w-3/4" : "md:w-1/2 md:border-r md:border-supportBorder"}`}
                     >
                       <div className="space-y-6">{children}</div>
                     </div>
-                    <aside
-                        id="right-sidebar"
-                        className="hidden md:block w-full md:w-1/4 sticky top-16 h-[calc(100vh-80px)] overflow-y-auto p-2 fade-in-up"
-                    ></aside>
+                    {!isChatPage && (
+                        <aside
+                            id="right-sidebar"
+                            className="hidden md:block w-full md:w-1/4 sticky top-16 h-[calc(100vh-80px)] overflow-y-auto p-2 fade-in-up"
+                        ></aside>
+                    )}
                   </main>
                 </div>
                 <BottomNav />
