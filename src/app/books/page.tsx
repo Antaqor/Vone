@@ -41,7 +41,7 @@ export default function BooksPage() {
         {books.map((book) => (
           <div
             key={book._id}
-            className="bg-[#212121] rounded-lg shadow p-4 flex flex-col"
+            className="bg-[#111111] rounded-lg shadow p-4 flex flex-col"
           >
             <div className="h-48 mb-3 overflow-hidden rounded">
               {book.coverImageUrl ? (

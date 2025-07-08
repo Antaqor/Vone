@@ -29,7 +29,7 @@ html {
     color-scheme: light;
     --brand-color: #119C99;
     --support-border: #272F36;
-    --background-dark: #0F181E;
+    --background-dark: #111111;
     --text-primary: #272F36;
     --accent: #FF2C55;
     --premium: #119C99;
@@ -37,20 +37,20 @@ html {
 }
 
 html.dark {
-    background-color: #212121;
+    background-color: #111111;
     color-scheme: dark;
     color: #F5F6F8;
     --support-border: #272F36;
 }
 
 html.dark body {
-    background-color: #212121;
+    background-color: #111111;
     color: #F5F6F8;
 }
 
 
 html.dark .bg-white {
-    background-color: #212121 !important;
+    background-color: #111111 !important;
 }
 
 html.dark .text-black {

@@ -72,7 +72,7 @@ export default function PostInput({ onPost }: Props) {
         e.preventDefault();
         createPost();
       }}
-      className="flex bg-[#212121] rounded-xl shadow px-4 py-5 m-4 max-w-xl mx-auto"
+      className="flex bg-[#111111] rounded-xl shadow px-4 py-5 m-4 max-w-xl mx-auto"
     >
       {user?.profilePicture ? (
         <Image
