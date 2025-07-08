@@ -63,9 +63,8 @@ export default function LoginPage() {
                 transition={{ duration: 0.1, ease: "easeOut" }}
                 className="w-full max-w-md space-y-6 bg-[#111111] text-black dark:bg-[#111111] dark:text-white p-8 rounded-xl shadow-lg"
             >
-                <div className="text-center space-y-1 mb-4">
-                    <h2 className="text-2xl font-bold">AI Нийгмийн Сүлжээ</h2>
-                    <p className="text-sm text-gray-500">AI мэдлэгийг овсгоотой эзэмш</p>
+                <div className="text-center mb-4">
+                    <h2 className="text-2xl font-bold">Монгол сошиал платформ</h2>
                 </div>
                 <h1 className="text-3xl font-bold">Нэвтрэх</h1>
                 <form onSubmit={handleSubmit} className="space-y-6">
