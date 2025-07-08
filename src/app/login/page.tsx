@@ -13,7 +13,7 @@ export default function LoginPage() {
     const [password, setPassword] = useState("");
     const [remember, setRemember] = useState(false);
     const [error, setError] = useState("");
-
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const savedUser = localStorage.getItem("rememberUsername");
@@ -31,7 +31,6 @@ export default function LoginPage() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError("");
-
         try {
             const res = await axios.post(`${BASE_URL}/api/auth/login`, {
                 username,
@@ -57,45 +56,74 @@ export default function LoginPage() {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-brand via-blue-500 to-purple-600 text-white px-4 py-8">
+        <div className="w-full max-w-lg space-y-10 bg-backgroundDark/80 backdrop-blur text-white p-10">
             <motion.div
                 whileHover={{ opacity: 0.97 }}
                 transition={{ duration: 0.1, ease: "easeOut" }}
-                className="w-full max-w-md space-y-6 bg-backgroundDark/80 backdrop-blur text-white p-8 rounded-2xl shadow-2xl"
+                // ↑ just this line changed ↓
+                className="w-full max-w-lg space-y-6 bg-backgroundDark/80 backdrop-blur text-white p-8 rounded-2xl shadow-2xl"
             >
-                <div className="text-center mb-4">
-                    <h2 className="text-2xl font-bold">Монгол сошиал платформ</h2>
+                <div className="flex justify-center mb-3">
+                    <motion.h2
+                        initial={{ opacity: 0, y: 10, scale: 0.97 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        transition={{ duration: 0.65, type: "spring", stiffness: 60 }}
+                        className="
+                glitch
+                font-orbitron
+                select-none
+                tracking-wider
+                text-center
+                leading-none
+                w-full
+                max-w-xs
+                sm:max-w-md
+                mx-auto
+            "
+                        data-text="Монгол Сошиал Платформ"
+                        style={{
+                            backgroundImage: "linear-gradient(90deg, #119C99, #FFC0CB 65%, #119C99)",
+                            WebkitBackgroundClip: "text",
+                            backgroundClip: "text",
+                            color: "transparent",
+                            fontSize: "1.5rem",
+                            margin: "0 auto",
+                            display: "inline-block",
+                        }}
+                    >
+
+                    </motion.h2>
                 </div>
-                <h1 className="text-3xl font-bold">Нэвтрэх</h1>
+                <h1 className="text-3xl font-bold text-black">Нэвтрэх</h1>
                 <form onSubmit={handleSubmit} className="space-y-6">
                     <div>
-                        <label className="block text-sm font-medium text-black dark:text-white mb-1">
+                        <label className="block text-sm font-medium text-black mb-1">
                             Хэрэглэгчийн нэр
                         </label>
                         <input
                             type="text"
                             className="w-full border border-gray-700 rounded-lg px-4 py-3 bg-inputBg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-brand"
-                            placeholder="Хэрэглэгчийн нэр"
+                            placeholder="Нэр"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
                             required
                         />
                     </div>
                     <div>
-                        <label className="block text-sm font-medium text-black dark:text-white mb-1">
+                        <label className="block text-sm font-medium text-black mb-1">
                             Нууц үг
                         </label>
                         <input
                             type="password"
                             className="w-full border border-gray-700 rounded-lg px-4 py-3 bg-inputBg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-brand"
-                            placeholder="Нууц үг"
+                            placeholder="********"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
                         />
                     </div>
-                    <div className="flex items-center justify-between text-sm text-gray-700 dark:text-gray-300">
-                        <label className="flex items-center text-black dark:text-white">
+                    <div className="flex items-center justify-between text-sm text-gray-700">
+                        <label className="flex items-center text-black">
                             <input
                                 type="checkbox"
                                 className="h-4 w-4 mr-2"
@@ -112,22 +140,25 @@ export default function LoginPage() {
                             Нууц үгээ мартсан?
                         </button>
                     </div>
-                    {error && <p className="text-red-600 text-sm" role="alert">{error}</p>}
+                    {error && <p className="text-red-600 text-sm">{error}</p>}
                     <button
                         type="submit"
-                        className="w-full bg-brand text-white py-3 rounded-lg font-semibold hover:opacity-90 transition"
+                        className={`w-full py-3  rounded-md font-bold text-lg bg-[#119C99] hover:opacity-90 transition flex items-center justify-center gap-2 ${
+                            loading ? "opacity-50 cursor-not-allowed" : ""
+                        }`}
+                        disabled={loading}
                     >
                         Нэвтрэх
                     </button>
                 </form>
                 <div className="flex items-center my-2">
-                    <div className="flex-grow border-t border-gray-300" />
-                    <span className="mx-2 text-gray-500 text-sm">Эсвэл</span>
-                    <div className="flex-grow border-t border-gray-300" />
+                    <div className="flex-grow border-t border-[#2B2E31]" />
+                    <span className="mx-2 text-gray-500 text-sm">эсвэл</span>
+                    <div className="flex-grow border-t border-[#2B2E31]" />
                 </div>
                 <button
                     onClick={() => router.push("/register")}
-                    className="block w-full text-sm font-medium text-brand underline hover:opacity-90"
+                    className="w-full py-3 bg-[#212121] border border-[#119C99] text-[#119C99] rounded-md font-bold hover:bg-[#119C99]/10 transition"
                 >
                     Шинээр бүртгүүлэх
                 </button>

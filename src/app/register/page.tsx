@@ -238,7 +238,7 @@ export default function RegisterMultiStepPage() {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-brand via-blue-500 to-purple-600 text-white px-4 py-8">
+        <div className="w-full max-w-lg space-y-10 bg-backgroundDark/80 backdrop-blur text-white p-10">
             <div className="w-full max-w-md space-y-6 bg-backgroundDark/80 backdrop-blur text-white p-8 rounded-2xl shadow-2xl">
                 {error && <p className="text-red-600">{error}</p>}
                 {success && <p className="text-green-600">{success}</p>}
@@ -253,7 +253,7 @@ export default function RegisterMultiStepPage() {
                             <input
                                 type="text"
                                 className={getInputClass("username")}
-                                placeholder="хэрэглэгчийн нэр"
+                                placeholder="Хэрэглэгчийн нэр"
                                 value={username}
                                 onChange={(e) => setUsername(e.target.value)}
                             />
