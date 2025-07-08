@@ -230,16 +230,16 @@ export default function RegisterMultiStepPage() {
 
     // ---------- Utility: conditional className for inputs/selects ----------
     const getInputClass = (fieldName: string) => {
-        return `w-full rounded-md px-3 py-2 text-black bg-[#111111] focus:bg-[#323232] focus:outline-none focus:ring-2 ${
+        return `w-full rounded-md px-3 py-2 bg-inputBg text-white focus:outline-none focus:ring-2 ${
             fieldErrors[fieldName]
                 ? "border border-red-500 focus:ring-red-500"
-                : "border border-gray-300 focus:ring-brand"
+                : "border border-gray-700 focus:ring-brand"
         }`;
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-brand via-[#0e8386] to-backgroundDark text-white px-4 py-8">
-            <div className="w-full max-w-md space-y-6 bg-[#111111] text-black dark:bg-[#111111] dark:text-white p-8 rounded-xl shadow-lg">
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-brand via-blue-500 to-purple-600 text-white px-4 py-8">
+            <div className="w-full max-w-md space-y-6 bg-backgroundDark/80 backdrop-blur text-white p-8 rounded-2xl shadow-2xl">
                 {error && <p className="text-red-600">{error}</p>}
                 {success && <p className="text-green-600">{success}</p>}
 
@@ -444,6 +444,13 @@ export default function RegisterMultiStepPage() {
                         </div>
                     </form>
                 )}
+                <button
+                    type="button"
+                    onClick={() => router.push("/login")}
+                    className="block w-full text-sm font-medium text-brand underline hover:opacity-90"
+                >
+                    Буцах
+                </button>
             </div>
         </div>
     );
