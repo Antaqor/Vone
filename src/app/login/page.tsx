@@ -64,9 +64,9 @@ export default function LoginPage() {
             >
                 <div className="text-center mb-4">
                     <h2
-                        className="text-2xl font-orbitron font-extrabold bg-gradient-to-r from-[#119C99] via-[#FFC0CB] to-[#119C99] bg-clip-text text-transparent tracking-widest uppercase neon-animate"
+                        className="text-3xl font-orbitron font-extrabold bg-gradient-to-r from-[#119C99] via-[#FFC0CB] to-[#119C99] bg-clip-text text-transparent tracking-widest uppercase neon-animate"
                     >
-                        Монгол Социал Платформ
+                      Vone Network
                     </h2>
                 </div>
                 <form onSubmit={handleSubmit} className="space-y-6">
