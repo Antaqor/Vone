@@ -73,6 +73,7 @@ export default function LoginPage() {
             sm:bg-backgroundDark/80
             sm:backdrop-blur
             sm:p-8
+            sm:py-10
             sm:rounded-2xl
             sm:shadow-2xl
         "
@@ -147,7 +148,7 @@ export default function LoginPage() {
                 </div>
                 <button
                     onClick={() => router.push("/register")}
-                    className="w-full py-3 bg-[#212121] border border-[#119C99] text-[#119C99] rounded-md font-bold hover:bg-[#119C99]/10 transition"
+                    className="block w-full text-sm font-medium text-brand hover:text-[#28b6d3]"
                 >
                     Шинээр бүртгүүлэх
                 </button>
