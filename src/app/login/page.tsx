@@ -14,7 +14,6 @@ export default function LoginPage() {
     const [remember, setRemember] = useState(false);
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
-
     useEffect(() => {
         const savedUser = localStorage.getItem("rememberUsername");
         const savedPass = localStorage.getItem("rememberPassword");
@@ -63,38 +62,13 @@ export default function LoginPage() {
                 // ↑ just this line changed ↓
                 className="w-full max-w-lg space-y-6 bg-backgroundDark/80 backdrop-blur text-white p-8 rounded-2xl shadow-2xl"
             >
-                <div className="flex justify-center mb-3">
-                    <motion.h2
-                        initial={{ opacity: 0, y: 10, scale: 0.97 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        transition={{ duration: 0.65, type: "spring", stiffness: 60 }}
-                        className="
-                glitch
-                font-orbitron
-                select-none
-                tracking-wider
-                text-center
-                leading-none
-                w-full
-                max-w-xs
-                sm:max-w-md
-                mx-auto
-            "
-                        data-text="Монгол Сошиал Платформ"
-                        style={{
-                            backgroundImage: "linear-gradient(90deg, #119C99, #FFC0CB 65%, #119C99)",
-                            WebkitBackgroundClip: "text",
-                            backgroundClip: "text",
-                            color: "transparent",
-                            fontSize: "1.5rem",
-                            margin: "0 auto",
-                            display: "inline-block",
-                        }}
+                <div className="text-center mb-4">
+                    <h2
+                        className="text-2xl font-orbitron font-extrabold bg-gradient-to-r from-[#119C99] via-[#FFC0CB] to-[#119C99] bg-clip-text text-transparent tracking-widest uppercase neon-animate"
                     >
-
-                    </motion.h2>
+                        Монгол Социал Платформ
+                    </h2>
                 </div>
-                <h1 className="text-3xl font-bold text-black">Нэвтрэх</h1>
                 <form onSubmit={handleSubmit} className="space-y-6">
                     <div>
                         <label className="block text-sm font-medium text-black mb-1">
