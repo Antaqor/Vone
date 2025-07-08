@@ -238,7 +238,7 @@ export default function RegisterMultiStepPage() {
     };
 
     return (
-        <div className="w-full max-w-lg space-y-10 bg-backgroundDark/80 backdrop-blur text-white p-10">
+        <div className="w-full max-w-lg space-y-10 text-white p-10">
             <div className="w-full max-w-md space-y-6 bg-backgroundDark/80 backdrop-blur text-white p-8 rounded-2xl shadow-2xl">
                 {error && <p className="text-red-600">{error}</p>}
                 {success && <p className="text-green-600">{success}</p>}

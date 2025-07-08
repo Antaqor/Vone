@@ -55,7 +55,7 @@ export default function LoginPage() {
     };
 
     return (
-        <div className="w-full max-w-lg space-y-10 bg-backgroundDark/80 backdrop-blur text-white p-10">
+        <div className="w-full max-w-lg space-y-10 text-white p-10">
             <motion.div
                 whileHover={{ opacity: 0.97 }}
                 transition={{ duration: 0.1, ease: "easeOut" }}
