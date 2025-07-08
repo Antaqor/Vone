@@ -89,6 +89,7 @@ export default function LayoutClient({
   const isWidePage =
       pathname.startsWith("/dashboard") || pathname.startsWith("/classroom");
   const isChatPage = pathname.startsWith("/chat");
+  const isAuthPage = pathname === "/login" || pathname === "/register";
 
   useEffect(() => {
     const timer = setTimeout(() => setMountLoading(false), 500);
@@ -106,61 +107,69 @@ export default function LayoutClient({
                         pathname.startsWith("/users") ||
                         pathname.startsWith("/profile")) && <LoadingOverlay />}
                 <NavigationLoader />
-                <div className="max-w-7xl w-full mx-auto md:px-6">
-                  <SidebarControl />
-                  <Header />
-                  <main className="flex-grow flex flex-col md:flex-row gap-0 pt-16">
-                    <aside
-                        id="left-sidebar"
-                        className="hidden md:block w-full md:w-1/4 border-r border-supportBorder sticky top-16 h-[calc(100vh-80px)] overflow-y-auto fade-in-up"
-                    >
-                      <nav>
-                        <ul className="space-y-1">
-                          <li>
-                            <Link
-                                href="/"
-                                className="group flex items-center gap-2 p-4 pl-0 text-xl font-semibold text-gray-700 transition-smooth focus:outline-none hover:text-brand focus:ring-2 focus:ring-brand"
-                            >
-                              <Image src={HomeIconSrc} alt="Chat" width={24} height={24} className="w-6 h-6 group-hover:invert group-hover:brightness-0 transition-colors" />
-                              <span>Нүүр</span>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link
-                                href="/classroom"
-                                className="group flex items-center gap-2 p-4 pl-0 text-xl font-semibold text-gray-700 transition-smooth focus:outline-none hover:text-brand focus:ring-2 focus:ring-brand"
-                            >
-                              <Image src={StudyIconSrc} alt="Chat" width={24} height={24} className="w-6 h-6 group-hover:invert group-hover:brightness-0 transition-colors" />
-                              <span>Хичээл</span>
-                            </Link>
-                          </li>
-                          <NotificationNavItem />
-                          <li>
-                            <Link
-                                href="/chat"
-                                className="group flex items-center gap-2 p-4 pl-0 text-xl font-semibold text-gray-700 transition-smooth focus:outline-none hover:text-brand focus:ring-2 focus:ring-brand"
-                            >
-                              <Image src={ChatIconSrc} alt="Chat" width={24} height={24} className="w-6 h-6 group-hover:invert group-hover:brightness-0 transition-colors" />
-                              <span>Чат</span>
-                            </Link>
-                          </li>
-                        </ul>
-                      </nav>
-                    </aside>
-                    <div
-                        className={`w-full ${isWidePage ? "md:w-full" : isChatPage ? "md:w-3/4" : "md:w-1/2 md:border-r md:border-supportBorder"}`}
-                    >
-                      <div className="space-y-6">{children}</div>
-                    </div>
-                    {!isChatPage && (
+                {isAuthPage ? (
+                  <div className="flex items-center justify-center min-h-screen">
+                    {children}
+                  </div>
+                ) : (
+                  <>
+                    <div className="max-w-7xl w-full mx-auto md:px-6">
+                      <SidebarControl />
+                      <Header />
+                      <main className="flex-grow flex flex-col md:flex-row gap-0 pt-16">
                         <aside
-                            id="right-sidebar"
-                            className="hidden md:block w-full md:w-1/4 sticky top-16 h-[calc(100vh-80px)] overflow-y-auto p-2 fade-in-up"
-                        ></aside>
-                    )}
-                  </main>
-                </div>
-                <BottomNav />
+                            id="left-sidebar"
+                            className="hidden md:block w-full md:w-1/4 border-r border-supportBorder sticky top-16 h-[calc(100vh-80px)] overflow-y-auto fade-in-up"
+                        >
+                          <nav>
+                            <ul className="space-y-1">
+                              <li>
+                                <Link
+                                    href="/"
+                                    className="group flex items-center gap-2 p-4 pl-0 text-xl font-semibold text-gray-700 transition-smooth focus:outline-none hover:text-brand focus:ring-2 focus:ring-brand"
+                                >
+                                  <Image src={HomeIconSrc} alt="Chat" width={24} height={24} className="w-6 h-6 group-hover:invert group-hover:brightness-0 transition-colors" />
+                                  <span>Нүүр</span>
+                                </Link>
+                              </li>
+                              <li>
+                                <Link
+                                    href="/classroom"
+                                    className="group flex items-center gap-2 p-4 pl-0 text-xl font-semibold text-gray-700 transition-smooth focus:outline-none hover:text-brand focus:ring-2 focus:ring-brand"
+                                >
+                                  <Image src={StudyIconSrc} alt="Chat" width={24} height={24} className="w-6 h-6 group-hover:invert group-hover:brightness-0 transition-colors" />
+                                  <span>Хичээл</span>
+                                </Link>
+                              </li>
+                              <NotificationNavItem />
+                              <li>
+                                <Link
+                                    href="/chat"
+                                    className="group flex items-center gap-2 p-4 pl-0 text-xl font-semibold text-gray-700 transition-smooth focus:outline-none hover:text-brand focus:ring-2 focus:ring-brand"
+                                >
+                                  <Image src={ChatIconSrc} alt="Chat" width={24} height={24} className="w-6 h-6 group-hover:invert group-hover:brightness-0 transition-colors" />
+                                  <span>Чат</span>
+                                </Link>
+                              </li>
+                            </ul>
+                          </nav>
+                        </aside>
+                        <div
+                            className={`w-full ${isWidePage ? "md:w-full" : isChatPage ? "md:w-3/4" : "md:w-1/2 md:border-r md:border-supportBorder"}`}
+                        >
+                          <div className="space-y-6">{children}</div>
+                        </div>
+                        {!isChatPage && (
+                            <aside
+                                id="right-sidebar"
+                                className="hidden md:block w-full md:w-1/4 sticky top-16 h-[calc(100vh-80px)] overflow-y-auto p-2 fade-in-up"
+                            ></aside>
+                        )}
+                      </main>
+                    </div>
+                    <BottomNav />
+                  </>
+                )}
               </NotificationProvider>
             </AuthGuard>
           </AuthProvider>
