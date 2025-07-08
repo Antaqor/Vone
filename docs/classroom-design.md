@@ -1,32 +1,32 @@
-# Classroom Page Design Guidelines
+# Анги Хуудасны Дизайны Зөвлөмж
 
-This document describes the UX/UI specifications for the `Classroom` page. The goal is to provide a mobile friendly layout and a clear style guide for implementation.
+Энэ баримт бичиг нь `Classroom` хуудсанд зориулсан UX/UI-ийн тодорхойлолтыг тайлбарлаж байна. Үүний зорилго нь гар утсанд ээлтэй зохион байгуулалт, хэрэгжүүлэхэд зориулсан загварын нэгдсэн удирдамж өгөх юм.
 
-## Layout
-- **Responsive columns**: On `md` screens and above the page uses a two column layout with a sidebar on the left and the lesson content on the right. On small screens the sidebar becomes a slide in panel triggered by a menu button.
-- **Sidebar sizing**: width `w-64` (16rem) on mobile and `w-80` (20rem) for `md` and up.
-- **Spacing**: padding inside the sidebar is `p-6`. Main content has `p-4` on mobile and `p-10` on `md` and above.
-- **Sidebar toggle**: A hamburger button (`Bars3Icon`) positioned `top-2 left-2` opens the sidebar on mobile. A close button (`XMarkIcon`) inside the sidebar at `top-2 right-2` hides it.
-- **Layering**: Both the toggle button and sidebar use a z-index above the header (`z-[1000]`) so they remain clickable on small screens.
+## Зохион Байгуулалт
+- **Хариу өгөх багана**: `md` болон түүнээс дээш дэлгэц дээр хуудас нь зүүн талд хажуу талын цэс, баруун талд хичээлийн агуулгатай хоёр баганатай байна. Бага дэлгэц дээр хажуу цэс нь товч дээр дарснаар гулсаж гарах самбар болно.
+- **Хажуу цэсний өргөн**: гар утсанд `w-64` (16rem), `md` болон түүнээс дээшэд `w-80` (20rem).
+- **Зай**: хажуу цэсэн доторх padding нь `p-6`. Үндсэн агуулга гар утсанд `p-4`, `md` болон түүнээс дээшэд `p-10` байна.
+- **Хажуу цэс нээх**: `Bars3Icon` товчийг `top-2 left-2` байрлуулж гар утсанд хажуу цэсийг нээнэ. `XMarkIcon` товчийг `top-2 right-2` дотор байрлуулж хаадаг.
+- **Давхарга**: товч болон хажуу цэс хоёулаа толгой хэсгийн дээр `z-[1000]` индекс ашиглаж, жижиг дэлгэц дээр дарахад саадгүй болгоно.
 
-## Colors
-- **Brand color**: `#119C99` (`bg-brand` in Tailwind config).
-- **Sidebar borders**: `border-gray-200` on light mode.
-- **Completed state**: green `#22c55e` icons (`text-green-500`) and progress bar (`bg-green-400`).
-- **Selected item**: `bg-cyan-50` background with a left border `border-cyan-400`.
+## Өнгө
+- **Брэндийн өнгө**: `#119C99` (`bg-brand` Tailwind тохиргоонд).
+- **Хажуу цэсний хүрээ**: гэрэлтэй горимд `border-gray-200`.
+- **Дууссан төлөв**: ногоон `#22c55e` дүрсүүд (`text-green-500`) болон ахицын хөндлөн мөр (`bg-green-400`).
+- **Сонгогдсон зүйл**: `bg-cyan-50` дэвсгэр ба зүүн талдаа `border-cyan-400` хүрээтэй.
 
-## Typography
-- Base font is Inter (loaded via `next/font`).
-- Heading inside sidebar uses `text-xl` and `font-bold`.
-- Lesson titles use `font-medium` with truncation for long text.
+## Үсгийн Хэв
+- Үндсэн фонтыг `next/font`-оор ачаалсан Inter ашиглана.
+- Хажуу цэсний гарчиг нь `text-xl` болон `font-bold` байна.
+- Хичээлийн гарчиг нь урт текстийг таслахын тулд `font-medium` хэрэглэнэ.
 
-## Interactive Behaviors
-- **Hover**: lesson items slightly change background (`bg-yellow-50` default). Hover uses the `tesla-hover` utility which adds a subtle scale and overlay.
-- **Focus**: buttons and inputs rely on Tailwind's default focus styles; ensure `focus:outline-none focus:ring-2 focus:ring-brand` when creating new UI elements.
-- **Mobile sidebar**: tapping outside the panel closes it. The panel slides in/out using Tailwind `transition-transform`.
+## Харьцангуй Үйлдлүүд
+- **Хулгана дээр очих**: хичээлийн зүйлс бага зэрэг `bg-yellow-50` өнгөөр өөрчлөгдөнө. `tesla-hover` тусгай класс ашиглаж зөөлөн томролт, давхарга нэмнэ.
+- **Төвлөрөл**: товч, оролтууд Tailwind-ийн анхдагч төвлөрөлтэй; шинэ UI элемент хийхдээ `focus:outline-none focus:ring-2 focus:ring-brand` хэрэглэнэ.
+- **Гар утасны хажуу цэс**: самбарын гадна дарвал хаагдана. Самбар Tailwind-ийн `transition-transform` ашиглан гулсаж орж/гарна.
 
-## Platform Notes
-- Works with Tailwind CSS and Next.js client components.
-- Dark mode is supported via the global `.dark` class. Sidebar and text automatically adapt using existing CSS variables.
+## Платформын Тэмдэглэл
+- Tailwind CSS болон Next.js-ийн клиент бүрэлдэхүүнтэй ажиллана.
+- Хар горимыг дэлхийн `.dark` класс дэмждэг. Хажуу цэс болон текст нь одоо байгаа CSS хувьсагчаар автоматаар тохирч хувирна.
 
-These guidelines should keep the classroom page visually consistent across screen sizes while solving the previous issue of the sidebar not displaying on mobile.
+Эдгээр зөвлөмж нь өмнө нь гарч байсан гар утасанд хажуу цэс харагдахгүй байсан асуудлыг шийдэж, анги хуудсыг бүх дэлгэцийн хэмжээнд жигд харагдуулахад тусална.
