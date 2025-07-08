@@ -55,12 +55,27 @@ export default function LoginPage() {
     };
 
     return (
-        <div className="w-full max-w-lg space-y-10 text-white p-10">
+        <div className="w-full max-w-lg space-y-10 text-white p-4 sm:p-10">
             <motion.div
                 whileHover={{ opacity: 0.97 }}
                 transition={{ duration: 0.1, ease: "easeOut" }}
-                // ↑ just this line changed ↓
-                className="w-full max-w-lg space-y-6 bg-backgroundDark/80 backdrop-blur text-white p-8 rounded-2xl shadow-2xl"
+                className="
+            w-full
+            max-w-lg
+            space-y-6
+            text-white
+            p-0
+            bg-transparent
+            rounded-none
+            shadow-none
+            backdrop-blur-none
+            /* -- Only show these on desktop -- */
+            sm:bg-backgroundDark/80
+            sm:backdrop-blur
+            sm:p-8
+            sm:rounded-2xl
+            sm:shadow-2xl
+        "
             >
                 <div className="text-center mb-4">
                     <h2
