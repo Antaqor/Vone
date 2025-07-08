@@ -11,17 +11,15 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useAuth } from "./context/AuthContext";
-import { HeartIcon as HeartSolid } from "@heroicons/react/24/solid";
-import {
-  HeartIcon as HeartOutline,
-  ChatBubbleOvalLeftIcon,
-  ArrowUpTrayIcon,
-} from "@heroicons/react/24/outline";
 import LoadingSpinner from "./components/LoadingSpinner";
 import NextGenPostInput from "./components/NextGenPostInput";
 import { motion } from "framer-motion";
 import { formatPostDate } from "./lib/formatDate";
 import useLiveFeed from "./hooks/useLiveFeed";
+import ShareIconSrc from "@/app/img/share.svg";
+import CommentIconSrc from "@/app/img/comment.svg";
+import HeartIconSrc from "@/app/img/heartpost.svg";
+import HeartIconActiveSrc from "@/app/img/heartpostactive.svg";
 
 // ────────────────────────────────────────────────────────────────
 // Types
@@ -473,9 +471,24 @@ export default function HomePage() {
                         aria-label={`Like (${post.likes.length})`}
                       >
                         {likedPosts.includes(post._id) ? (
-                          <HeartSolid className="w-5 h-5 text-brand icon-hover-brand" />
+                            <Image
+                                src={HeartIconSrc}
+                                alt="Chat"
+                                width={20}
+                                height={20}
+                                className="w-5 h-5"
+                                style={{
+                                  filter: "invert(17%) sepia(6%) saturate(511%) hue-rotate(179deg) brightness(94%) contrast(60%)"
+                                }}
+                            />
                         ) : (
-                          <HeartOutline className="w-5 h-5 icon-hover-brand" />
+                            <Image
+                                src={HeartIconActiveSrc}
+                                alt="Chat"
+                                width={20}
+                                height={20}
+                                className="w-5 h-5"
+                            />
                         )}
                         <span>{post.likes.length}</span>
                       </motion.button>
@@ -487,7 +500,16 @@ export default function HomePage() {
                         className="flex items-center justify-center gap-1 hover:text-brand"
                         aria-label={`Comment (${post.comments?.length || 0})`}
                       >
-                        <ChatBubbleOvalLeftIcon className="w-5 h-5 icon-hover-brand" />
+                        <Image
+                            src={CommentIconSrc}
+                            alt="Chat"
+                            width={20}
+                            height={20}
+                            className="w-5 h-5"
+                            style={{
+                              filter: "invert(17%) sepia(6%) saturate(511%) hue-rotate(179deg) brightness(94%) contrast(60%)"
+                            }}
+                        />
                         <span>{post.comments?.length || 0}</span>
                       </button>
 
@@ -499,11 +521,18 @@ export default function HomePage() {
                         className="flex items-center justify-center gap-1 hover:text-brand"
                         aria-label={`Share (${post.shares || 0})`}
                       >
-                        <ArrowUpTrayIcon
-                          className={`w-5 h-5 ${
-                            sharedPosts.includes(post._id) ? "text-brand icon-hover-brand" : "icon-hover-brand"
-                          }`}
+                        <Image
+                            src={ShareIconSrc}
+                            alt="Chat"
+                            width={20}
+                            height={20}
+                            className="w-5 h-5"
+                            style={{
+                              filter: "invert(17%) sepia(6%) saturate(511%) hue-rotate(179deg) brightness(94%) contrast(60%)"
+                            }}
                         />
+
+
                         <span>{post.shares || 0}</span>
                       </motion.button>
                     </div>
@@ -523,7 +552,7 @@ export default function HomePage() {
                                   className="w-6 h-6 rounded-full object-cover"
                                 />
                               )}
-                              <div className="flex-1 bg-gray-100 rounded p-2">
+                              <div className="flex-1 rounded p-2">
                                 <p className="text-sm font-semibold">
                                   {comment.user?.username}
                                 </p>

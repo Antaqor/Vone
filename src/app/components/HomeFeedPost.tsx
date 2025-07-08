@@ -13,6 +13,7 @@ import axios from "axios";
 import { useAuth } from "../context/AuthContext";
 import { BASE_URL, UPLOADS_URL } from "../lib/config";
 import { formatPostDate } from "../lib/formatDate";
+import ShareIconSrc from "@/app/img/share.svg";
 import type { Post } from "@/types/Post";
 
 interface UserData {

@@ -19,6 +19,8 @@ import {
 import { CheckIcon, Squares2X2Icon } from '@heroicons/react/24/solid';
 import { useAuth } from '../context/AuthContext';
 import { BASE_URL } from '../lib/config';
+import StudyIconSrc from "@/app/img/study.svg";
+import Image from "next/image";
 
 interface Lesson {
   _id: string;
@@ -160,7 +162,8 @@ export default function ClassroomPage() {
           <XMarkIcon className="w-5 h-5 text-gray-600" />
         </button>
         <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
-          <Squares2X2Icon className="w-6 h-6" /> Classroom
+          <Image src={StudyIconSrc} alt="Chat" width={24} height={24} className="w-6 h-6 group-hover:invert group-hover:brightness-0 transition-colors" />
+   Хичээл
         </h2>
 
         {isAdmin && (

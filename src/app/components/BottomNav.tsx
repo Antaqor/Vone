@@ -9,6 +9,11 @@ import {
     ChatBubbleOvalLeftEllipsisIcon,
 } from "@heroicons/react/24/outline";
 import { useNotifications } from "../context/NotificationContext";
+import HomeIconSrc from "@/app/img/home.svg";
+import Image from "next/image";
+import HeartIconSrc from "@/app/img/heart.svg";
+import ChatIconSrc from "@/app/img/chat.svg";
+import StudyIconSrc from "@/app/img/study.svg";
 
 const BottomNav: React.FC = () => {
     const router = useRouter();
@@ -47,7 +52,8 @@ const BottomNav: React.FC = () => {
                     aria-label="Home"
                     className="p-1 text-white hover:text-brand"
                 >
-                    <HomeIcon className="h-7 w-7 icon-hover-brand" />
+                    <Image src={HomeIconSrc} alt="Chat" width={24} height={24} className="w-6 h-6 group-hover:invert group-hover:brightness-0 transition-colors" />
+
                 </button>
 
 
@@ -57,7 +63,8 @@ const BottomNav: React.FC = () => {
                     aria-label="Мэдэгдэл"
                     className="relative p-1 text-white hover:text-brand"
                 >
-                    <BellIcon className="h-7 w-7 icon-hover-brand" />
+                    <Image src={HeartIconSrc} alt="Chat" width={24} height={24} className="w-6 h-6 group-hover:invert group-hover:brightness-0 transition-colors" />
+
                     {unreadCount > 0 && (
                         <span className="absolute -top-1 -right-1 bg-red-500 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center">
                             {unreadCount}
@@ -71,7 +78,7 @@ const BottomNav: React.FC = () => {
                     aria-label="Chat"
                     className="p-1 text-white hover:text-brand"
                 >
-                    <ChatBubbleOvalLeftEllipsisIcon className="h-7 w-7 icon-hover-brand" />
+                    <Image src={ChatIconSrc} alt="Chat" width={24} height={24} className="w-6 h-6 group-hover:invert group-hover:brightness-0 transition-colors" />
                 </button>
 
                 {/* CLASSROOM */}
@@ -80,7 +87,7 @@ const BottomNav: React.FC = () => {
                     aria-label="Classroom"
                     className="p-1 text-white hover:text-brand"
                 >
-                    <AcademicCapIcon className="h-7 w-7 icon-hover-brand" />
+                    <Image src={StudyIconSrc} alt="Chat" width={24} height={24} className="w-6 h-6 group-hover:invert group-hover:brightness-0 transition-colors" />
                 </button>
 
             </div>
