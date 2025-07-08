@@ -57,11 +57,11 @@ export default function LoginPage() {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-brand via-[#0e8386] to-backgroundDark text-white px-4 py-8">
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-brand via-blue-500 to-purple-600 text-white px-4 py-8">
             <motion.div
                 whileHover={{ opacity: 0.97 }}
                 transition={{ duration: 0.1, ease: "easeOut" }}
-                className="w-full max-w-md space-y-6 bg-[#111111] text-black dark:bg-[#111111] dark:text-white p-8 rounded-xl shadow-lg"
+                className="w-full max-w-md space-y-6 bg-backgroundDark/80 backdrop-blur text-white p-8 rounded-2xl shadow-2xl"
             >
                 <div className="text-center mb-4">
                     <h2 className="text-2xl font-bold">Монгол сошиал платформ</h2>
@@ -74,7 +74,7 @@ export default function LoginPage() {
                         </label>
                         <input
                             type="text"
-                            className="w-full border border-gray-300 rounded-lg px-4 py-3 text-black bg-[#111111] focus:bg-[#323232] focus:outline-none focus:ring-2 focus:ring-[#30c9e8] placeholder-gray-400"
+                            className="w-full border border-gray-700 rounded-lg px-4 py-3 bg-inputBg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-brand"
                             placeholder="Хэрэглэгчийн нэр"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
@@ -87,7 +87,7 @@ export default function LoginPage() {
                         </label>
                         <input
                             type="password"
-                            className="w-full border border-gray-300 rounded-lg px-4 py-3 text-black bg-[#111111] focus:bg-[#323232] focus:outline-none focus:ring-2 focus:ring-[#30c9e8] placeholder-gray-400"
+                            className="w-full border border-gray-700 rounded-lg px-4 py-3 bg-inputBg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-brand"
                             placeholder="Нууц үг"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
@@ -115,7 +115,7 @@ export default function LoginPage() {
                     {error && <p className="text-red-600 text-sm" role="alert">{error}</p>}
                     <button
                         type="submit"
-                        className="w-full bg-[#30c9e8] text-white py-3 rounded-lg font-semibold hover:bg-[#28b6d3] active:bg-[#239bb3] transition-colors"
+                        className="w-full bg-brand text-white py-3 rounded-lg font-semibold hover:opacity-90 transition"
                     >
                         Нэвтрэх
                     </button>
@@ -127,7 +127,7 @@ export default function LoginPage() {
                 </div>
                 <button
                     onClick={() => router.push("/register")}
-                    className="block w-full text-sm font-medium text-brand underline hover:text-[#28b6d3]"
+                    className="block w-full text-sm font-medium text-brand underline hover:opacity-90"
                 >
                     Шинээр бүртгүүлэх
                 </button>
