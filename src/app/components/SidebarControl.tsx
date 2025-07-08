@@ -20,6 +20,9 @@ export default function SidebarControl() {
       left.style.display = '';
       right.style.display = '';
     }
+    if (pathname.startsWith('/chat')) {
+      right.style.display = 'none';
+    }
   }, [pathname]);
   return null;
 }
