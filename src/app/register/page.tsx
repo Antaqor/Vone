@@ -238,8 +238,26 @@ export default function RegisterMultiStepPage() {
     };
 
     return (
-        <div className="w-full max-w-lg space-y-10 text-white p-10">
-            <div className="w-full max-w-md space-y-6 bg-backgroundDark/80 backdrop-blur text-white p-8 rounded-2xl shadow-2xl">
+        <div className="w-full max-w-lg space-y-20 text-white p-4 sm:p-10">
+            <div
+                className="
+            w-full
+            max-w-md
+            space-y-6
+            text-white
+            p-0
+            bg-transparent
+            rounded-none
+            shadow-none
+            backdrop-blur-none
+            /* Only show card styles on sm and up */
+            sm:bg-backgroundDark/80
+            sm:backdrop-blur
+            sm:p-8
+            sm:rounded-2xl
+            sm:shadow-2xl
+        "
+            >
                 {error && <p className="text-red-600">{error}</p>}
                 {success && <p className="text-green-600">{success}</p>}
 
