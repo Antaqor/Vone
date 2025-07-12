@@ -11,7 +11,7 @@ export const metadata: Metadata = {
         default: "VONE",
         template: "%s | VONE",
     },
-    description: "VONE - Сүлжээ, инноваци, олон нийтийн хүчийг нэгтгэсэн платформ.",
+    description: "VONE - A platform that unites networking, innovation and community.",
     keywords: ["VONE", "Community", "DAO", "Network", "Innovation", "Social Network"],
     authors: [{ name: "Vone Tech", url: "https://www.vone.mn" }],
     verification: {
@@ -19,8 +19,8 @@ export const metadata: Metadata = {
         yandex: "YOUR_YANDEX_SITE_VERIFICATION_TOKEN",
     },
     openGraph: {
-        title: "VONE – Дараагийн үеийн платформ",
-        description: "VONE CLAN-д нэгдээрэй – Сүлжээ, инновацийн хамт олон.",
+        title: "VONE – The next-generation platform",
+        description: "Join the VONE CLAN – a community of networking and innovation.",
         url: "https://www.vone.mn",
         siteName: "VONE",
         images: [
@@ -31,13 +31,13 @@ export const metadata: Metadata = {
                 alt: "VONE Community - THE VONE CLAN",
             },
         ],
-        locale: "mn_MN",
+        locale: "en_US",
         type: "website",
     },
     twitter: {
         card: "summary_large_image",
-        title: "VONE - Дараагийн үеийн платформ",
-        description: "VONE CLAN-д нэгдээрэй – Сүлжээ, инновацийн хамт олон.",
+        title: "VONE - The next-generation platform",
+        description: "Join the VONE CLAN – a community of networking and innovation.",
         images: [
             "https://cdn.midjourney.com/9c84cf56-387f-4b49-a6c9-b991843f77e6/0_0.png",
         ],
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
-        <html lang="mn" className="dark">
+        <html lang="en" className="dark">
             <body className={`${inter.className} flex flex-col min-h-screen bg-surface text-primary`}>
                 <LayoutClient>{children}</LayoutClient>
             </body>
