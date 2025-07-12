@@ -89,7 +89,7 @@ export default function Header() {
                                         onClick={logout}
                                         className="relative group text-gray-700 hover:text-brand"
                                     >
-                                        Гарах
+                                        Logout
                                         <span className="absolute left-0 bottom-0 w-full h-0.5 bg-brand scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
                                     </button>
                                 </>
@@ -99,14 +99,14 @@ export default function Header() {
                                         href="/login"
                                     className="relative group text-gray-700 hover:text-brand"
                                 >
-                                    Нэвтрэх
+                                      Login
                                     <span className="absolute left-0 bottom-0 w-full h-0.5 bg-brand scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
                                 </Link>
                                 <Link
                                     href="/register"
                                     className="relative group text-gray-700 hover:text-brand bg-brand text-white px-2 rounded"
                                 >
-                                    Бүртгүүлэх
+                                      Register
                                     <span className="absolute left-0 bottom-0 w-full h-0.5 bg-brand scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
                                 </Link>
                             </>
@@ -178,7 +178,7 @@ export default function Header() {
                                                 }}
                                                 className="block text-left w-full text-xl font-medium text-gray-800 hover:text-brand"
                                             >
-                                                Гарах
+                                                  Logout
                                             </button>
                                         </li>
                                     </>
@@ -190,7 +190,7 @@ export default function Header() {
                                                 onClick={() => setIsMenuOpen(false)}
                                                 className="block text-xl font-medium text-gray-800 hover:text-brand"
                                             >
-                                                Нэвтрэх
+                                                  Login
                                             </Link>
                                         </li>
                                         <li>
@@ -199,7 +199,7 @@ export default function Header() {
                                                 onClick={() => setIsMenuOpen(false)}
                                                 className="block text-xl font-medium text-gray-800 hover:text-brand bg-brand text-white px-2 rounded"
                                             >
-                                                Бүртгүүлэх
+                                                  Register
                                             </Link>
                                         </li>
                                     </>
@@ -216,7 +216,7 @@ export default function Header() {
                                             className="flex items-center gap-2 hover:text-brand"
                                         >
                                             <HomeIcon className="w-6 h-6" />
-                                            Нүүр
+                                              Home
                                         </Link>
                                     </li>
                                 {loggedIn && !isPro && (
@@ -251,7 +251,7 @@ export default function Header() {
                                             className="flex items-center gap-2 hover:text-brand"
                                         >
                                             <AcademicCapIcon className="w-6 h-6" />
-                                            Хичээл
+                                              Classroom
                                         </Link>
                                     </li>
                                     <li>
@@ -261,7 +261,7 @@ export default function Header() {
                                             className="flex items-center gap-2 hover:text-brand"
                                         >
                                             <BellIcon className="w-6 h-6" />
-                                            Мэдүүлэл
+                                              Notifications
                                         </Link>
                                     </li>
                                     <li>
@@ -271,7 +271,7 @@ export default function Header() {
                                             className="flex items-center gap-2 hover:text-brand"
                                         >
                                             <ChatBubbleOvalLeftEllipsisIcon className="w-6 h-6" />
-                                            Чат
+                                              Chat
                                         </Link>
                                     </li>
                                 </ul>

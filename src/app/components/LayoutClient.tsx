@@ -67,7 +67,7 @@ function NotificationNavItem() {
         >
           <Image src={HeartIconSrc} alt="Chat" width={24} height={24} className="w-6 h-6 group-hover:invert group-hover:brightness-0 transition-colors" />
           <span className="flex items-center">
-          Мэдэгдэл
+          Notifications
             {unreadCount > 0 && (
                 <span className="ml-1 bg-red-500 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center">
               {unreadCount}
@@ -129,7 +129,7 @@ export default function LayoutClient({
                                     className="group flex items-center gap-2 p-4 pl-0 text-xl font-semibold text-gray-700 transition-smooth focus:outline-none hover:text-brand focus:ring-2 focus:ring-brand"
                                 >
                                   <Image src={HomeIconSrc} alt="Chat" width={24} height={24} className="w-6 h-6 group-hover:invert group-hover:brightness-0 transition-colors" />
-                                  <span>Нүүр</span>
+                                  <span>Home</span>
                                 </Link>
                               </li>
                               <li>
@@ -138,7 +138,7 @@ export default function LayoutClient({
                                     className="group flex items-center gap-2 p-4 pl-0 text-xl font-semibold text-gray-700 transition-smooth focus:outline-none hover:text-brand focus:ring-2 focus:ring-brand"
                                 >
                                   <Image src={StudyIconSrc} alt="Chat" width={24} height={24} className="w-6 h-6 group-hover:invert group-hover:brightness-0 transition-colors" />
-                                  <span>Хичээл</span>
+                                  <span>Classroom</span>
                                 </Link>
                               </li>
                               <NotificationNavItem />
@@ -148,7 +148,7 @@ export default function LayoutClient({
                                     className="group flex items-center gap-2 p-4 pl-0 text-xl font-semibold text-gray-700 transition-smooth focus:outline-none hover:text-brand focus:ring-2 focus:ring-brand"
                                 >
                                   <Image src={ChatIconSrc} alt="Chat" width={24} height={24} className="w-6 h-6 group-hover:invert group-hover:brightness-0 transition-colors" />
-                                  <span>Чат</span>
+                                  <span>Chat</span>
                                 </Link>
                               </li>
                             </ul>
