@@ -36,8 +36,8 @@ export function NotificationProvider({ children }: { children: React.ReactNode }
         'Notification' in window &&
         Notification.permission === 'granted'
       ) {
-        new Notification('Шинэ мэдэгдэл', {
-          body: `Танд уншаагүй ${count} мэдэгдэл байна`,
+        new Notification('New notification', {
+          body: `You have ${count} unread notifications`,
         });
       }
       prev.current = count;

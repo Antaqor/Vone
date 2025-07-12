@@ -62,14 +62,14 @@ export default function NotificationsPage() {
     fetchNotifications();
   }, [user?.accessToken, refresh]);
 
-  if (loading) return <div className="p-4">Уншиж байна...</div>;
-  if (!user) return <div className="p-4">Мэдэгдлийг үзэхийн тулд нэвтэрнэ үү.</div>;
+  if (loading) return <div className="p-4">Loading...</div>;
+  if (!user) return <div className="p-4">Please sign in to view your notifications.</div>;
 
   return (
     <div className="p-4 space-y-4">
-      <h1 className="text-2xl font-bold">Мэдэгдэл</h1>
+      <h1 className="text-2xl font-bold">Notifications</h1>
       {notifications.length === 0 ? (
-        <p>Мэдэгдэл алга.</p>
+        <p>No notifications.</p>
       ) : (
         <ul className="divide-y divide-white/10">
           {notifications.map((n) => (
