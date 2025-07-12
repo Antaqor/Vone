@@ -163,7 +163,7 @@ export default function ClassroomPage() {
         </button>
         <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
           <Image src={StudyIconSrc} alt="Chat" width={24} height={24} className="w-6 h-6 group-hover:invert group-hover:brightness-0 transition-colors" />
-   Хичээл
+   Lessons
         </h2>
 
         {isAdmin && (

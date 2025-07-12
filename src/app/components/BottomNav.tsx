@@ -60,7 +60,7 @@ const BottomNav: React.FC = () => {
                 {/* NOTIFICATIONS */}
                 <button
                     onClick={() => router.push("/notifications")}
-                    aria-label="Мэдэгдэл"
+                    aria-label="Notifications"
                     className="relative p-1 text-white hover:text-brand"
                 >
                     <Image src={HeartIconSrc} alt="Chat" width={24} height={24} className="w-6 h-6 group-hover:invert group-hover:brightness-0 transition-colors" />
