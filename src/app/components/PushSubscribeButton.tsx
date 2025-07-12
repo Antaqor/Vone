@@ -11,7 +11,7 @@ export default function PushSubscribeButton() {
       onClick={subscribe}
       className="px-3 py-1 rounded bg-blue-600 text-white text-sm"
     >
-      Мэдэгдэл идэвхжүүлэх
+      Enable Notifications
     </button>
   );
 }

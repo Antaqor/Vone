@@ -31,39 +31,39 @@ export default function NotificationItem({ notification, currentUserId }: Props)
     if (notification.type === "like") {
       return (
         <span>
-          {userLink} таны бичлэгт {" "}
+          {userLink} liked your{" "}
           <Link href={`/profile/${currentUserId}?post=${notification.post?._id}`} className="hover:underline">
-            бичлэг
+            post
           </Link>
-          д лайк дарлаа.
+          .
         </span>
       );
     }
     if (notification.type === "comment") {
       return (
         <span>
-          {userLink} таны {" "}
+          {userLink} commented on your{" "}
           <Link href={`/profile/${currentUserId}?post=${notification.post?._id}`} className="hover:underline">
-            бичлэг
+            post
           </Link>
-          д сэтгэгдэл үлдээв.
+          .
         </span>
       );
     }
     if (notification.type === "reply") {
       return (
         <span>
-          {userLink} таны {" "}
+          {userLink} replied to your{" "}
           <Link href={`/profile/${currentUserId}?post=${notification.post?._id}`} className="hover:underline">
-            сэтгэгдэл
+            comment
           </Link>
-          д хариу бичлээ.
+          .
         </span>
       );
     }
     return (
       <span>
-        {userLink} таныг дагаж эхэллээ.
+        {userLink} started following you.
       </span>
     );
   };
