@@ -330,15 +330,15 @@ export default function HomePage() {
           {/* Prompt login */}
           {!loggedIn && (
             <div className="bg-secondary p-6 text-center space-y-3">
-              <p>Feed үзэхийн тулд нэвтрэх эсвэл бүртгүүлэх шаардлагатай.</p>
+              <p>You need to log in or register to view the feed.</p>
               <Link href="/login" className="text-blue-600 underline">
-                Нэвтрэх
+                Log in
               </Link>
               <Link
                 href="/register"
                 className="block bg-brand text-white px-3 py-1 rounded w-fit mx-auto"
               >
-                Бүртгүүлэх
+                Register
               </Link>
             </div>
           )}
