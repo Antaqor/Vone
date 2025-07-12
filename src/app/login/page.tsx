@@ -50,7 +50,7 @@ export default function LoginPage() {
             }
         } catch (err: any) {
             console.error("Login error:", err);
-            setError("Нэвтрэх алдаа.");
+            setError("Login error.");
         }
     };
 
@@ -88,12 +88,12 @@ export default function LoginPage() {
                 <form onSubmit={handleSubmit} className="space-y-6">
                     <div>
                         <label className="block text-sm font-medium text-black mb-1">
-                            Хэрэглэгчийн нэр
+                            Username
                         </label>
                         <input
                             type="text"
                             className="w-full border border-gray-700 rounded-lg px-4 py-3 bg-inputBg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-brand"
-                            placeholder="Нэр"
+                            placeholder="Username"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
                             required
@@ -101,7 +101,7 @@ export default function LoginPage() {
                     </div>
                     <div>
                         <label className="block text-sm font-medium text-black mb-1">
-                            Нууц үг
+                            Password
                         </label>
                         <input
                             type="password"
@@ -120,14 +120,14 @@ export default function LoginPage() {
                                 checked={remember}
                                 onChange={(e) => setRemember(e.target.checked)}
                             />
-                            Сануулах
+                            Remember me
                         </label>
                         <button
                             type="button"
-                            onClick={() => alert("Нууц үгээ мартсан уу?")}
+                            onClick={() => alert("Forgot your password?")}
                             className="underline hover:text-brand"
                         >
-                            Нууц үгээ мартсан?
+                            Forgot password?
                         </button>
                     </div>
                     {error && <p className="text-red-600 text-sm">{error}</p>}
@@ -138,19 +138,19 @@ export default function LoginPage() {
                         }`}
                         disabled={loading}
                     >
-                        Нэвтрэх
+                        Log In
                     </button>
                 </form>
                 <div className="flex items-center my-2">
                     <div className="flex-grow border-t border-[#2B2E31]" />
-                    <span className="mx-2 text-gray-500 text-sm">эсвэл</span>
+                    <span className="mx-2 text-gray-500 text-sm">or</span>
                     <div className="flex-grow border-t border-[#2B2E31]" />
                 </div>
                 <button
                     onClick={() => router.push("/register")}
                     className="block w-full text-sm font-medium text-brand hover:text-[#28b6d3]"
                 >
-                    Шинээр бүртгүүлэх
+                    Register
                 </button>
             </motion.div>
         </div>
