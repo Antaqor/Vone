@@ -21,13 +21,17 @@ router.post('/', authenticateToken, async (req, res) => {
     return res.status(403).json({ error: 'Forbidden' });
   }
   try {
-    const { url, title, description, folder } = req.body;
+    const { videoUrl, title, description, folder } = req.body;
+    const isRecorded = videoUrl.includes('/rec/share/');
+    const isLive = !isRecorded;
     const lesson = await Lesson.create({
-      url,
+      videoUrl,
       title,
       description,
       folder,
       author: req.user._id,
+      isRecorded,
+      isLive,
     });
     await lesson.populate('author', 'username');
     res.status(201).json(lesson);
@@ -42,10 +46,12 @@ router.put('/:id', authenticateToken, async (req, res) => {
     return res.status(403).json({ error: 'Forbidden' });
   }
   try {
-    const { url, title, description, folder } = req.body;
+    const { videoUrl, title, description, folder } = req.body;
+    const isRecorded = videoUrl.includes('/rec/share/');
+    const isLive = !isRecorded;
     const lesson = await Lesson.findByIdAndUpdate(
       req.params.id,
-      { url, title, description, folder },
+      { videoUrl, title, description, folder, isRecorded, isLive },
       { new: true }
     );
     if (!lesson) return res.status(404).json({ error: 'Lesson not found' });

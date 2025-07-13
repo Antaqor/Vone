@@ -2,7 +2,9 @@ const mongoose = require('mongoose');
 
 const LessonSchema = new mongoose.Schema(
   {
-    url: { type: String, required: true },
+    videoUrl: { type: String, required: true },
+    isRecorded: { type: Boolean, default: false },
+    isLive: { type: Boolean, default: false },
     title: { type: String, required: true },
     description: { type: String, default: '' },
     folder: { type: String, default: 'General' },
