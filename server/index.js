@@ -20,6 +20,7 @@ const cartRoutes    = require("./routes/cartRoutes"); // ← feature branch win
 const notificationRoutes = require("./routes/notification");
 const pushRoutes    = require("./routes/push");
 const lessonRoutes  = require("./routes/lessonRoutes");
+const inviteRoutes  = require("./routes/invite");
 const webpush       = require("web-push");
 const chatRoutesFn  = require("./routes/chat");
 
@@ -87,6 +88,7 @@ app.use("/api/products", productRoutes);
 app.use("/api/cart",     cartRoutes); // ← now live
 app.use("/api/notifications", notificationRoutes);
 app.use("/api/push",     pushRoutes);
+app.use("/api/invite",   inviteRoutes);
 const chatRoutes = chatRoutesFn(io);
 app.use("/api/chat",    chatRoutes);
 app.use("/api/lessons", lessonRoutes);

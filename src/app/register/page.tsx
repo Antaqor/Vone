@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import axios from "axios";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { BASE_URL } from "../lib/config";
 
 /** Helper validations **/
@@ -20,6 +20,8 @@ const MAX_FILE_SIZE = 5 * 1024 * 1024;  // 5MB
 
 export default function RegisterMultiStepPage() {
     const router = useRouter();
+    const searchParams = useSearchParams();
+    const initialInvite = searchParams.get("invite") || "";
 
     // ---------- STEP CONTROL ----------
     const [step, setStep] = useState(1);
@@ -30,6 +32,7 @@ export default function RegisterMultiStepPage() {
     const [birthMonth, setBirthMonth] = useState("");
     const [birthDay, setBirthDay] = useState("");
     const [birthYear, setBirthYear] = useState("");
+    const [inviteCode, setInviteCode] = useState(initialInvite);
 
     // ---------- STEP 2 FIELDS ----------
     const [password, setPassword] = useState("");
@@ -54,6 +57,7 @@ export default function RegisterMultiStepPage() {
         gender: "",
         location: "",
         profilePicture: "",
+        inviteCode: "",
     });
 
     // Replace with your actual server endpoint
@@ -74,6 +78,7 @@ export default function RegisterMultiStepPage() {
             gender: "",
             location: "",
             profilePicture: "",
+            inviteCode: "",
         });
 
         const errors: { [key: string]: string } = {};
@@ -120,6 +125,7 @@ export default function RegisterMultiStepPage() {
             gender: "",
             location: "",
             profilePicture: "",
+            inviteCode: "",
         });
 
         const errors: { [key: string]: string } = {};
@@ -135,6 +141,9 @@ export default function RegisterMultiStepPage() {
         }
         if (!profilePicture) {
             errors.profilePicture = "Профайл зураг оруулна уу.";
+        }
+        if (!inviteCode.trim()) {
+            errors.inviteCode = "Урилгын код шаардлагатай";
         }
 
         if (Object.keys(errors).length > 0) {
@@ -164,6 +173,9 @@ export default function RegisterMultiStepPage() {
             formData.append("location", location);
             if (profilePicture) {
                 formData.append("profilePicture", profilePicture);
+            }
+            if (inviteCode) {
+                formData.append("inviteCode", inviteCode);
             }
 
             const res = await axios.post(`${BASE_URL}/api/auth/register`, formData, {
@@ -290,8 +302,23 @@ export default function RegisterMultiStepPage() {
                                 value={phoneNumber}
                                 onChange={(e) => setPhoneNumber(e.target.value)}
                             />
-                            {fieldErrors.phoneNumber && (
+                        {fieldErrors.phoneNumber && (
                                 <p className="text-red-500 text-sm mt-1">{fieldErrors.phoneNumber}</p>
+                            )}
+                        </div>
+
+                        {/* INVITE CODE */}
+                        <div>
+                            <label className="block font-medium text-black mb-1">Урилгын код</label>
+                            <input
+                                type="text"
+                                className={getInputClass("inviteCode")}
+                                placeholder="Invite code"
+                                value={inviteCode}
+                                onChange={(e) => setInviteCode(e.target.value)}
+                            />
+                            {fieldErrors.inviteCode && (
+                                <p className="text-red-500 text-sm mt-1">{fieldErrors.inviteCode}</p>
                             )}
                         </div>
 

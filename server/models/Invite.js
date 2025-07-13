@@ -1,0 +1,10 @@
+const mongoose = require('mongoose');
+
+const InviteSchema = new mongoose.Schema({
+  code: { type: String, required: true, unique: true },
+  inviter: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  used: { type: Boolean, default: false },
+  createdAt: { type: Date, default: Date.now },
+});
+
+module.exports = mongoose.model('Invite', InviteSchema);
