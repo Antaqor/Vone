@@ -9,6 +9,7 @@ const fs = require("fs");
 
 const User = require("../models/User");
 const authenticateToken = require("../middleware/authMiddleware");
+const Invite = require("../models/Invite");
 
 // ---------------------- FILE SIZE LIMITS (in bytes) ----------------------
 const MIN_FILE_SIZE = 10 * 1024;        // 10KB
@@ -67,7 +68,7 @@ router.post("/register", (req, res) => {
             console.log(req.files);
 
             // Destructure fields
-            const { username, password, phoneNumber, location, gender } = req.body;
+            const { username, password, phoneNumber, location, gender, inviteCode } = req.body;
 
             // Parse birthday
             let birthday = {};
@@ -98,14 +99,23 @@ router.post("/register", (req, res) => {
                 !gender ||
                 !birthday.year ||
                 !birthday.month ||
-                !birthday.day
+                !birthday.day ||
+                !inviteCode
             ) {
                 if (uploadedProfile) removeUploadedFile(uploadedProfile);
                 if (uploadedCover) removeUploadedFile(uploadedCover);
                 return res.status(400).json({
                     error:
-                        "Missing required fields (username, password, phoneNumber, location, gender, birthday)",
+                        "Missing required fields (username, password, phoneNumber, location, gender, birthday, inviteCode)",
                 });
+            }
+
+            // Validate invite code
+            const invite = await Invite.findOne({ code: inviteCode, used: false });
+            if (!invite) {
+                if (uploadedProfile) removeUploadedFile(uploadedProfile);
+                if (uploadedCover) removeUploadedFile(uploadedCover);
+                return res.status(400).json({ error: "Invalid invitation code" });
             }
 
             // Check if username is taken
@@ -130,6 +140,10 @@ router.post("/register", (req, res) => {
                 profilePicture: profilePicturePath,
                 coverImage: coverImagePath,
             });
+
+            // mark invite as used
+            invite.used = true;
+            await invite.save();
 
             // Success!
             return res.status(201).json({
