@@ -24,18 +24,14 @@ import Image from "next/image";
 
 interface Lesson {
   _id: string;
-  url: string;
+  videoUrl: string;
   title: string;
   description?: string;
   folder?: string;
   completed?: boolean;
   author?: { username: string };
-}
-
-function extractVideoId(url: string) {
-  const regex = /(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?|shorts)|.*[?&]v=)|youtu\.be\/)([A-Za-z0-9_-]{11})/;
-  const match = url.match(regex);
-  return match ? match[1] : '';
+  isRecorded?: boolean;
+  isLive?: boolean;
 }
 
 export default function ClassroomPage() {
@@ -52,6 +48,8 @@ export default function ClassroomPage() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [openFolders, setOpenFolders] = useState<Record<string, boolean>>({});
 
+  const zoomRegex = /^https?:\/\/([a-z]+\.)?zoom\.us\/(rec\/share|j)\/[A-Za-z0-9\-_?=]+/;
+
   // Fetch lessons
   useEffect(() => {
     const fetchLessons = async () => {
@@ -67,11 +65,12 @@ export default function ClassroomPage() {
     fetchLessons();
   }, []);
 
+  const isValidUrl = zoomRegex.test(newUrl.trim());
   const validForm =
-    newUrl.trim() && newTitle.trim() && newDesc.trim() && newFolder.trim();
-  const progress = (['url', 'title', 'desc', 'folder'] as const).reduce(
+    isValidUrl && newTitle.trim() && newDesc.trim() && newFolder.trim();
+  const progress = (['videoUrl', 'title', 'desc', 'folder'] as const).reduce(
     (acc, field) => {
-      if (field === 'url' && newUrl.trim()) return acc + 1;
+      if (field === 'videoUrl' && isValidUrl) return acc + 1;
       if (field === 'title' && newTitle.trim()) return acc + 1;
       if (field === 'desc' && newDesc.trim()) return acc + 1;
       if (field === 'folder' && newFolder.trim()) return acc + 1;
@@ -86,7 +85,7 @@ export default function ClassroomPage() {
     try {
       const { data } = await axios.post<Lesson>(
         `${BASE_URL}/api/lessons`,
-        { url: newUrl, title: newTitle, description: newDesc, folder: newFolder },
+        { videoUrl: newUrl, title: newTitle, description: newDesc, folder: newFolder },
         { headers: { Authorization: `Bearer ${user.accessToken}` } }
       );
       setLessons((prev) => [...prev, { ...data, completed: false }]);
@@ -105,7 +104,7 @@ export default function ClassroomPage() {
     try {
       const { data } = await axios.put<Lesson>(
         `${BASE_URL}/api/lessons/${editing._id}`,
-        { url: newUrl, title: newTitle, description: newDesc, folder: newFolder },
+        { videoUrl: newUrl, title: newTitle, description: newDesc, folder: newFolder },
         { headers: { Authorization: `Bearer ${user.accessToken}` } }
       );
       setLessons((prev) => prev.map((l) => (l._id === data._id ? { ...data, completed: l.completed } : l)));
@@ -174,13 +173,17 @@ export default function ClassroomPage() {
                 style={{ width: `${progressPct}%` }}
               />
             </div>
+            <label className="block text-sm font-medium mb-1">Zoom бичлэгийн линк</label>
             <input
               type="text"
-              placeholder="YouTube video URL"
+              placeholder="https://zoom.us/rec/share/…"
               value={newUrl}
               onChange={(e) => setNewUrl(e.target.value)}
-              className="w-full border p-2 rounded mb-2 focus:ring"
+              className="w-full border p-2 rounded mb-1 focus:ring-brand"
             />
+            <p className={`text-sm ${isValidUrl ? 'text-gray-500' : 'text-red-500'}`}> 
+              {isValidUrl ? 'Zoom-рекорд эсвэл шууд live линк оруулна уу.' : 'Zoom линк оруулна уу (zoom.us)'}
+            </p>
             <input
               type="text"
               placeholder="Lesson title"
@@ -201,19 +204,6 @@ export default function ClassroomPage() {
               onChange={(e) => setNewDesc(e.target.value)}
               className="w-full border p-2 rounded mb-2 focus:ring"
             />
-            {validForm && (
-              <div className="flex items-center gap-3 mb-2">
-                <img
-                  src={`https://img.youtube.com/vi/${extractVideoId(newUrl)}/hqdefault.jpg`}
-                  alt="thumbnail"
-                  className="w-24 h-16 object-cover rounded"
-                />
-                <div>
-                  <h3 className="font-semibold">{newTitle}</h3>
-                  <p className="text-sm text-gray-600 line-clamp-2">{newDesc}</p>
-                </div>
-              </div>
-            )}
             <button
               onClick={editing ? saveLesson : addLesson}
               disabled={!validForm}
@@ -280,7 +270,7 @@ export default function ClassroomPage() {
                                 e.stopPropagation();
                                 setEditing(lesson);
                                 setNewTitle(lesson.title);
-                                setNewUrl(lesson.url);
+                                setNewUrl(lesson.videoUrl);
                                 setNewDesc(lesson.description || '');
                                 setNewFolder(lesson.folder || 'General');
                               }}
@@ -309,13 +299,24 @@ export default function ClassroomPage() {
           <>
             <h1 className="text-2xl font-bold mb-4">{selected.title}</h1>
             <div className="w-full max-w-4xl mb-4">
-              <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
-                <iframe
-                  src={`https://www.youtube.com/embed/${extractVideoId(selected.url)}`}
-                  className="absolute top-0 left-0 w-full h-full rounded-xl shadow"
-                  allowFullScreen
-                />
-              </div>
+              {selected.isRecorded ? (
+                <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+                  <iframe
+                    src={`${selected.videoUrl}/player`}
+                    className="absolute top-0 left-0 w-full h-full rounded-xl shadow"
+                    allowFullScreen
+                  />
+                </div>
+              ) : (
+                <a
+                  href={selected.videoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-brand text-white px-4 py-2 rounded shadow inline-block"
+                >
+                  Join Live
+                </a>
+              )}
             </div>
             {selected.description && (
               <p className="text-lg text-gray-700 mb-2">{selected.description}</p>
