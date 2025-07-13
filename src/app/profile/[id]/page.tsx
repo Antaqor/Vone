@@ -88,7 +88,7 @@ export default function PublicProfilePage() {
                 console.error("Fetch user error:", err.response?.data || err.message);
                 setError(
                     err.response?.data?.error ||
-                        "Хэрэглэгчийн профайл татаж авахад алдаа гарлаа."
+                        "Failed to fetch user profile."
                 );
             })
             .finally(() => setLoading(false));
@@ -126,7 +126,7 @@ export default function PublicProfilePage() {
         return <div className="p-4 text-red-500 text-center">{error}</div>;
     }
     if (!userData) {
-        return <div className="p-4 text-center">Профайл олдсонгүй</div>;
+        return <div className="p-4 text-center">Profile not found</div>;
     }
 
     const isPro = userData.subscriptionExpiresAt
@@ -194,12 +194,12 @@ export default function PublicProfilePage() {
                 </div>
                 {userData.rating && (
                     <p className="text-sm text-gray-400">
-                        ★ {userData.rating} үнэлгээ
+                        ★ {userData.rating} rating
                     </p>
                 )}
                 {userData.location && (
                     <p className="text-sm text-gray-400">
-                        Байршил: {userData.location}
+                        Location: {userData.location}
                     </p>
                 )}
                 <div className="flex gap-6 mt-2 text-sm">
@@ -221,13 +221,13 @@ export default function PublicProfilePage() {
                 }}
             >
                 <main className="m-0 p-0">
-                    <h2 className="text-xl font-semibold mb-4">Нийтлэлүүд</h2>
+                    <h2 className="text-xl font-semibold mb-4">Posts</h2>
                     {postLoading && (
-                        <p className="text-gray-400 mb-2">Ачааллаж байна...</p>
+                        <p className="text-gray-400 mb-2">Loading...</p>
                     )}
                     {!postLoading && userPosts.length === 0 && (
                         <p className="text-gray-400">
-                            Энэ хэрэглэгч нийтлэлгүй байна.
+                            This user has no posts.
                         </p>
                     )}
                     <div className="flex flex-col gap-4">

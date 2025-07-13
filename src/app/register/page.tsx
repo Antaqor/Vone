@@ -79,19 +79,19 @@ export default function RegisterMultiStepPage() {
         const errors: { [key: string]: string } = {};
 
         if (!username.trim()) {
-            errors.username = "Хэрэглэгчийн нэр оруулна уу.";
+            errors.username = "Please enter a username.";
         }
         if (!isValidPhoneNumber(phoneNumber)) {
-            errors.phoneNumber = "Утасны дугаар буруу байна.";
+            errors.phoneNumber = "Invalid phone number.";
         }
         if (!birthMonth) {
-            errors.birthMonth = "Төрсөн сарыг сонгоно уу.";
+            errors.birthMonth = "Please select a birth month.";
         }
         if (!birthDay) {
-            errors.birthDay = "Төрсөн өдрийг сонгоно уу.";
+            errors.birthDay = "Please select a birth day.";
         }
         if (!birthYear) {
-            errors.birthYear = "Төрсөн жилийг сонгоно уу.";
+            errors.birthYear = "Please select a birth year.";
         }
 
         if (Object.keys(errors).length > 0) {
@@ -125,16 +125,16 @@ export default function RegisterMultiStepPage() {
         const errors: { [key: string]: string } = {};
 
         if (!isValidPassword(password)) {
-            errors.password = "Нууц үг хамгийн багадаа 6 тэмдэгт байх ёстой.";
+            errors.password = "Password must be at least 6 characters.";
         }
         if (!gender.trim()) {
-            errors.gender = "Хүйсээ сонгоно уу.";
+            errors.gender = "Please select your gender.";
         }
         if (!location.trim()) {
-            errors.location = "Байршлаа оруулна уу.";
+            errors.location = "Please enter your location.";
         }
         if (!profilePicture) {
-            errors.profilePicture = "Профайл зураг оруулна уу.";
+            errors.profilePicture = "Please upload a profile picture.";
         }
 
         if (Object.keys(errors).length > 0) {
@@ -171,7 +171,7 @@ export default function RegisterMultiStepPage() {
             });
 
             if (res.status === 201) {
-                setSuccess("Ажилттай бүртгэл үүсгэлээ");
+                setSuccess("Registration successful");
                 // Clear all fields
                 setStep(1);
                 setUsername("");
@@ -188,7 +188,7 @@ export default function RegisterMultiStepPage() {
             }
         } catch (err: any) {
             console.error("Register error:", err);
-            setError(err.response?.data?.error || "Бүртгэлийн алдаа гарлаа");
+            setError(err.response?.data?.error || "Registration failed");
         }
     };
 
@@ -208,7 +208,7 @@ export default function RegisterMultiStepPage() {
         if (file.size < MIN_FILE_SIZE || file.size > MAX_FILE_SIZE) {
             setFieldErrors((prev) => ({
                 ...prev,
-                profilePicture: `Зураг нь хамгийн багадаа 10KB, ихдээ 5MB байх ёстой (current: ${(file.size / 1024).toFixed(
+                profilePicture: `Image must be between 10KB and 5MB (current: ${(file.size / 1024).toFixed(
                     1
                 )} KB).`,
             }));
@@ -219,7 +219,7 @@ export default function RegisterMultiStepPage() {
         if (!file.type.startsWith("image/")) {
             setFieldErrors((prev) => ({
                 ...prev,
-                profilePicture: "Зөвхөн зураг файл оруулах боломжтой.",
+                profilePicture: "Only image files are allowed.",
             }));
             return;
         }
@@ -263,15 +263,15 @@ export default function RegisterMultiStepPage() {
 
                 {step === 1 && (
                     <form onSubmit={(e) => e.preventDefault()} className="space-y-6">
-                        <h1 className="text-3xl font-bold text-black">Бүртгэлээ үүсгэх</h1>
+                        <h1 className="text-3xl font-bold text-black">Create Account</h1>
 
                         {/* USERNAME */}
                         <div>
-                            <label className="block font-medium text-black mb-1">Хэрэглэгчийн нэр</label>
+                            <label className="block font-medium text-black mb-1">Username</label>
                             <input
                                 type="text"
                                 className={getInputClass("username")}
-                                placeholder="Хэрэглэгчийн нэр"
+                                placeholder="Username"
                                 value={username}
                                 onChange={(e) => setUsername(e.target.value)}
                             />
@@ -282,7 +282,7 @@ export default function RegisterMultiStepPage() {
 
                         {/* PHONE NUMBER */}
                         <div>
-                            <label className="block font-medium text-black mb-1">Утасны дугаар</label>
+                            <label className="block font-medium text-black mb-1">Phone Number</label>
                             <input
                                 type="text"
                                 className={getInputClass("phoneNumber")}
@@ -297,9 +297,9 @@ export default function RegisterMultiStepPage() {
 
                         {/* DATE OF BIRTH */}
                         <div>
-                            <label className="block font-medium text-black mb-1">Төрсөн огноо</label>
+                            <label className="block font-medium text-black mb-1">Date of Birth</label>
                             <p className="text-xs text-gray-500 mb-2">
-                                Энэ мэдээлэл олон нийтэд харагдахгүй. Насаа баталгаажуулна уу.
+                                This information won't be public. Please verify your age.
                             </p>
                             <div className="flex space-x-2">
                                 <select
@@ -307,20 +307,20 @@ export default function RegisterMultiStepPage() {
                                     value={birthMonth}
                                     onChange={(e) => setBirthMonth(e.target.value)}
                                 >
-                                    <option value="">Сар</option>
+                                    <option value="">Month</option>
                                     {[
-                                        "Нэгдүгээр сар",
-                                        "Хоёрдугаар сар",
-                                        "Гуравдугаар сар",
-                                        "Дөрөвдүгээр сар",
-                                        "Тавдугаар сар",
-                                        "Зургаадугаар сар",
-                                        "Долоодугаар сар",
-                                        "Наймдугаар сар",
-                                        "Есдүгээр сар",
-                                        "Аравдугаар сар",
-                                        "Арваннэгдүгээр сар",
-                                        "Арванхоёрдугаар сар",
+                                        "January",
+                                        "February",
+                                        "March",
+                                        "April",
+                                        "May",
+                                        "June",
+                                        "July",
+                                        "August",
+                                        "September",
+                                        "October",
+                                        "November",
+                                        "December",
                                     ].map((m) => (
                                         <option key={m} value={m}>
                                             {m}
@@ -332,7 +332,7 @@ export default function RegisterMultiStepPage() {
                                     value={birthDay}
                                     onChange={(e) => setBirthDay(e.target.value)}
                                 >
-                                    <option value="">Өдөр</option>
+                                    <option value="">Day</option>
                                     {Array.from({ length: 31 }, (_, i) => i + 1).map((d) => (
                                         <option key={d} value={d}>
                                             {d}
@@ -344,7 +344,7 @@ export default function RegisterMultiStepPage() {
                                     value={birthYear}
                                     onChange={(e) => setBirthYear(e.target.value)}
                                 >
-                                    <option value="">Жил</option>
+                                    <option value="">Year</option>
                                     {Array.from({ length: 70 }, (_, i) => 2025 - i).map((y) => (
                                         <option key={y} value={y}>
                                             {y}
@@ -366,19 +366,19 @@ export default function RegisterMultiStepPage() {
                             onClick={handleNext}
                             className="w-full bg-brand text-white font-semibold py-3 rounded-md hover:opacity-90 transition"
                         >
-                            Дараах
+                            Next
                         </button>
                     </form>
                 )}
 
                 {step === 2 && (
                     <form onSubmit={handleSubmit} className="space-y-6">
-                        <h1 className="text-3xl font-bold text-black">Нэмэлт мэдээлэл</h1>
+                        <h1 className="text-3xl font-bold text-black">Additional Information</h1>
 
                         {/* LOGIN PASSWORD */}
                         <div>
                             <label className="block text-sm font-medium text-brand mb-1">
-                                Нууц үг
+                                Password
                             </label>
                             <input
                                 type="password"
@@ -394,15 +394,15 @@ export default function RegisterMultiStepPage() {
 
                         {/* GENDER */}
                         <div>
-                            <label className="block text-sm font-medium text-black mb-1">Хүйс</label>
+                            <label className="block text-sm font-medium text-black mb-1">Gender</label>
                             <select
                                 className={getInputClass("gender")}
                                 value={gender}
                                 onChange={(e) => setGender(e.target.value)}
                             >
-                                <option value="">Сонгоно уу</option>
-                                <option value="male">Эр</option>
-                                <option value="female">Эм</option>
+                                <option value="">Select</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
                             </select>
                             {fieldErrors.gender && (
                                 <p className="text-red-500 text-xs mt-1">{fieldErrors.gender}</p>
@@ -412,12 +412,12 @@ export default function RegisterMultiStepPage() {
                         {/* LOCATION */}
                         <div>
                             <label className="block text-sm font-medium text-black mb-1">
-                                Байршил
+                                Location
                             </label>
                             <input
                                 type="text"
                                 className={getInputClass("location")}
-                                placeholder="Байршил"
+                                placeholder="Location"
                                 value={location}
                                 onChange={(e) => setLocation(e.target.value)}
                             />
@@ -429,7 +429,7 @@ export default function RegisterMultiStepPage() {
                         {/* PROFILE PICTURE + LOCAL SIZE CHECK */}
                         <div>
                             <label className="block text-sm font-medium text-black mb-1">
-                                Профайл зураг
+                                Profile Picture
                             </label>
                             <input
                                 type="file"
@@ -451,13 +451,13 @@ export default function RegisterMultiStepPage() {
                                 onClick={() => setStep(1)}
                                 className="flex-1 bg-gray-200 text-black py-3 rounded-md font-semibold hover:bg-gray-300 transition"
                             >
-                                Буцах
+                                Back
                             </button>
                             <button
                                 type="submit"
                                 className="flex-1 bg-brand text-white py-3 rounded-md font-semibold hover:opacity-90 transition"
                             >
-                                Бүртгүүлэх
+                                Sign Up
                             </button>
                         </div>
                     </form>
@@ -467,7 +467,7 @@ export default function RegisterMultiStepPage() {
                     onClick={() => router.push("/login")}
                     className="block w-full text-sm font-medium text-brand underline hover:opacity-90"
                 >
-                    Буцах
+                    Back
                 </button>
             </div>
         </div>
