@@ -66,37 +66,49 @@ body {
     font-family: "Poppins", sans-serif;
 }
 
+body {
+    background-color: #FFFFFF;
+    color: #000000;
+}
+
 html {
-    background-color: #F5F6F8;
+    background-color: #FFFFFF;
+    color: #000000;
     color-scheme: light;
-    --brand-color: #119C99;
-    --support-border: #272F36;
-    --background-dark: #111111;
-    --text-primary: #272F36;
-    --accent: #FF2C55;
-    --premium: #119C99;
-    --link: #44B2DF;
+    --brand-color: #000000;
+    --support-border: #000000;
+    --background-dark: #000000;
+    --text-primary: #000000;
+    --accent: #000000;
+    --premium: #000000;
+    --link: #000000;
 }
 
 html.dark {
-    background-color: #111111;
+    background-color: #000000;
     color-scheme: dark;
-    color: #F5F6F8;
-    --support-border: #272F36;
+    color: #FFFFFF;
+    --support-border: #FFFFFF;
+    --brand-color: #FFFFFF;
+    --background-dark: #000000;
+    --text-primary: #FFFFFF;
+    --accent: #FFFFFF;
+    --premium: #FFFFFF;
+    --link: #FFFFFF;
 }
 
 html.dark body {
-    background-color: #111111;
-    color: #F5F6F8;
+    background-color: #000000;
+    color: #FFFFFF;
 }
 
 
 html.dark .bg-white {
-    background-color: #111111 !important;
+    background-color: #000000 !important;
 }
 
 html.dark .text-black {
-    color: #ffffff !important;
+    color: #FFFFFF !important;
 }
 
 html.dark .text-gray-700,
