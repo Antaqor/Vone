@@ -8,18 +8,18 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        brand: '#119C99',
-        backgroundDark: '#111111',
-        surface: '#F5F6F8',
-        textPrimary: '#272F36',
-        accent: '#FF2C55',
-        premium: '#119C99',
-        link: '#44B2DF',
-        supportBorder: '#272F36',
-        primary: '#111111',
-        secondary: '#111111',
-        inputBg: '#1E1E1E',
-        inputText: '#AFAFAF',
+        brand: '#000000',
+        backgroundDark: '#000000',
+        surface: '#FFFFFF',
+        textPrimary: '#000000',
+        accent: '#000000',
+        premium: '#000000',
+        link: '#000000',
+        supportBorder: '#000000',
+        primary: '#000000',
+        secondary: '#000000',
+        inputBg: '#FFFFFF',
+        inputText: '#000000',
       },
       fontFamily: {
         sans: ['Inter', 'Helvetica', 'Arial', 'sans-serif'], // Minimalistic and clean font stack
