@@ -28,14 +28,14 @@
 @keyframes neon-glow {
     0%, 100% {
         text-shadow:
-                0 0 8px #119C99,
-                0 0 16px #FFC0CB,
-                0 0 32px #119C99;
+                0 0 8px #1400FF,
+                0 0 16px #1400FF,
+                0 0 32px #1400FF;
     }
     50% {
         text-shadow:
-                0 0 24px #FFC0CB,
-                0 0 40px #119C99;
+                0 0 24px #1400FF,
+                0 0 40px #1400FF;
     }
 }
 
@@ -67,34 +67,34 @@ body {
 }
 
 body {
-    background-color: #FFFFFF;
-    color: #000000;
+    background-color: #000000;
+    color: #FFFFFF;
 }
 
 html {
-    background-color: #FFFFFF;
-    color: #000000;
-    color-scheme: light;
-    --brand-color: #000000;
-    --support-border: #000000;
+    background-color: #000000;
+    color: #FFFFFF;
+    color-scheme: dark;
+    --brand-color: #1400FF;
+    --support-border: #1400FF;
     --background-dark: #000000;
-    --text-primary: #000000;
-    --accent: #000000;
-    --premium: #000000;
-    --link: #000000;
+    --text-primary: #FFFFFF;
+    --accent: #1400FF;
+    --premium: #1400FF;
+    --link: #1400FF;
 }
 
 html.dark {
     background-color: #000000;
     color-scheme: dark;
     color: #FFFFFF;
-    --support-border: #FFFFFF;
-    --brand-color: #FFFFFF;
+    --support-border: #1400FF;
+    --brand-color: #1400FF;
     --background-dark: #000000;
     --text-primary: #FFFFFF;
-    --accent: #FFFFFF;
-    --premium: #FFFFFF;
-    --link: #FFFFFF;
+    --accent: #1400FF;
+    --premium: #1400FF;
+    --link: #1400FF;
 }
 
 html.dark body {
