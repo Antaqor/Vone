@@ -22,7 +22,7 @@ This document outlines the UX and UI principles for the notifications page. The 
 
 ## Colors
 
-- The brand color `#119C99` is used for the unread dot and link accents.
+- The brand color `#1400FF` is used for the unread dot and link accents.
 - Background color follows existing theme classes (`bg-[#111111]` etc.).
 
 ## Interaction

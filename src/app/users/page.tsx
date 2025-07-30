@@ -125,7 +125,7 @@ export default function UsersPage() {
                         <motion.div
                             key={user._id}
                             onClick={() => router.push(`/profile/${user._id}`)}
-                            className="bg-[#111111] border border-gray-700 rounded-lg p-4 flex flex-col items-center shadow transition-transform duration-300 hover:bg-[#323232] hover:shadow-lg hover:-translate-y-1 hover:ring-1 hover:ring-[#30c9e8] cursor-pointer"
+                            className="bg-[#111111] border border-gray-700 rounded-lg p-4 flex flex-col items-center shadow transition-transform duration-300 hover:bg-[#323232] hover:shadow-lg hover:-translate-y-1 hover:ring-1 hover:ring-brand cursor-pointer"
                         >
                             <div className="relative mb-3">
                                 {user.profilePicture ? (
@@ -134,10 +134,10 @@ export default function UsersPage() {
                                         alt={user.username}
                                         width={96}
                                         height={96}
-                                        className="w-24 h-24 rounded-full object-cover ring-2 ring-[#30c9e8]"
+                                        className="w-24 h-24 rounded-full object-cover ring-2 ring-brand"
                                     />
                                 ) : (
-                                    <div className="w-24 h-24 rounded-full bg-gray-200 ring-2 ring-[#30c9e8]" />
+                                    <div className="w-24 h-24 rounded-full bg-gray-200 ring-2 ring-brand" />
                                 )}
                                 <span className={`absolute bottom-1 right-1 w-3 h-3 rounded-full border border-gray-700 ${statusColors[status]}`} />
                             </div>

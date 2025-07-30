@@ -99,8 +99,8 @@ export default function ChatWindow({ chatId, user, onBack }: ChatWindowProps) {
                 <div
                   className={`px-3 py-2 rounded-2xl text-sm shadow-[0_1px_1px_rgba(0,0,0,0.15)] ${
                     isMe
-                      ? "bg-[#119C99] text-white rounded-br-none"
-                      : "bg-[#CD4178] text-black rounded-bl-none"
+                      ? "bg-brand text-white rounded-br-none"
+                      : "bg-black text-white rounded-bl-none"
                   }`}
                 >
                   {msg.text}

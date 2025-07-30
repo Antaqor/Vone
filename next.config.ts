@@ -23,6 +23,7 @@ const nextConfig: NextConfig = {
             'dsifg2gm0y83d.cloudfront.net',
             'www.vone.mn',
             'vone.mn',
+            'sdmntprwestus3.oaiusercontent.com',
         ],
     },
 };

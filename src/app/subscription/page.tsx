@@ -119,7 +119,7 @@ export default function SubscriptionPage() {
               <p>
                 Гүйлгээний утга: <strong>{user?.username}</strong>
               </p>
-              <p className="text-[#CD4178]">
+              <p className="text-brand">
                 Үлдсэн хугацаа: {Math.floor(countdown / 60)}:
                 {(countdown % 60).toString().padStart(2, "0")}
               </p>

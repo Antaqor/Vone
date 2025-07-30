@@ -80,7 +80,7 @@ export default function LoginPage() {
             >
                 <div className="text-center mb-4">
                     <h2
-                        className="text-3xl font-orbitron font-extrabold bg-gradient-to-r from-[#119C99] via-[#FFC0CB] to-[#119C99] bg-clip-text text-transparent tracking-widest uppercase neon-animate"
+                        className="text-3xl font-orbitron font-extrabold bg-gradient-to-r from-brand via-brand to-brand bg-clip-text text-transparent tracking-widest uppercase neon-animate"
                     >
                       Vone Network
                     </h2>
@@ -133,7 +133,7 @@ export default function LoginPage() {
                     {error && <p className="text-red-600 text-sm">{error}</p>}
                     <button
                         type="submit"
-                        className={`w-full py-3  rounded-md font-bold text-lg bg-[#119C99] hover:opacity-90 transition flex items-center justify-center gap-2 ${
+                        className={`w-full py-3  rounded-md font-bold text-lg bg-brand hover:opacity-90 transition flex items-center justify-center gap-2 ${
                             loading ? "opacity-50 cursor-not-allowed" : ""
                         }`}
                         disabled={loading}
@@ -148,7 +148,7 @@ export default function LoginPage() {
                 </div>
                 <button
                     onClick={() => router.push("/register")}
-                    className="block w-full text-sm font-medium text-brand hover:text-[#28b6d3]"
+                    className="block w-full text-sm font-medium text-brand hover:text-brand"
                 >
                     Register
                 </button>

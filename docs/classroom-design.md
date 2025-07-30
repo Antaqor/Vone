@@ -10,7 +10,7 @@ This document describes the UX/UI specifications for the `Classroom` page. The g
 - **Layering**: Both the toggle button and sidebar use a z-index above the header (`z-[1000]`) so they remain clickable on small screens.
 
 ## Colors
-- **Brand color**: `#119C99` (`bg-brand` in Tailwind config).
+- **Brand color**: `#1400FF` (`bg-brand` in Tailwind config).
 - **Sidebar borders**: `border-gray-200` on light mode.
 - **Completed state**: green `#22c55e` icons (`text-green-500`) and progress bar (`bg-green-400`).
 - **Selected item**: `bg-cyan-50` background with a left border `border-cyan-400`.
