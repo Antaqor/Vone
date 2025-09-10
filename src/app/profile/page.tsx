@@ -108,7 +108,7 @@ export default function MyOwnProfilePage() {
                 console.error("My profile fetch error:", err.response?.data || err.message);
                 setError(
                     err.response?.data?.error ||
-                    "Өөрийн профайл татаж авахад алдаа гарлаа."
+                    "Failed to fetch your profile."
                 );
             })
             .finally(() => setLoadingProfile(false));
@@ -128,7 +128,7 @@ export default function MyOwnProfilePage() {
                 console.error("User posts fetch error:", err.response?.data || err.message);
                 setError(
                     err.response?.data?.error ||
-                    "Өөрийн нийтлэлүүдийг татаж авахад алдаа гарлаа."
+                    "Failed to load your posts."
                 );
             })
             .finally(() => setLoadingPosts(false));
@@ -153,7 +153,7 @@ export default function MyOwnProfilePage() {
         return <div className="p-4 text-red-500">{error}</div>;
     }
     if (!userData) {
-        return <div className="p-4">Өөрийн профайл олдсонгүй.</div>;
+        return <div className="p-4">Profile not found.</div>;
     }
 
     const isPro = userData.subscriptionExpiresAt
@@ -229,8 +229,8 @@ export default function MyOwnProfilePage() {
                     <h2 className="text-2xl font-bold">{userData.username}</h2>
                     {isPro && <FaCheckCircle className="text-brand" />}
                 </div>
-                {userData.rating && <p className="text-sm text-gray-400">★ {userData.rating} үнэлгээ</p>}
-                {userData.location && <p className="text-sm text-gray-400">Байршил: {userData.location}</p>}
+                {userData.rating && <p className="text-sm text-gray-400">★ {userData.rating} rating</p>}
+                {userData.location && <p className="text-sm text-gray-400">Location: {userData.location}</p>}
                 <div className="flex gap-6 mt-2 text-sm">
                     <Link href={`/profile/${userData._id}/followers`} className="hover:underline">
                         {userData.followers ? userData.followers.length : 0} Followers
@@ -244,7 +244,7 @@ export default function MyOwnProfilePage() {
             {/* Subscription expiration */}
             {userData.subscriptionExpiresAt && (
                 <div className="m-4 p-3 bg-blue-50 border border-blue-200 text-sm text-blue-800 rounded">
-                    Миний subscription дуусах огноо:{" "}
+                    My subscription expires on:{" "}
                     {new Date(userData.subscriptionExpiresAt).toLocaleDateString()}
                 </div>
             )}
@@ -258,7 +258,7 @@ export default function MyOwnProfilePage() {
                 }}
             >
                 <main className="m-0 p-0 px-4">
-                    <h2 className="text-xl font-semibold mb-4">Миний нийтлэлүүд</h2>
+                    <h2 className="text-xl font-semibold mb-4">My Posts</h2>
                     {loadingPosts ? (
                         <div>
                             {Array.from({ length: 2 }).map((_, i) => (
@@ -277,7 +277,7 @@ export default function MyOwnProfilePage() {
                             ))}
                         </div>
                     ) : (
-                        <p className="text-gray-400">Таны нийтэлсэн пост одоогоор алга.</p>
+                        <p className="text-gray-400">You have no posts yet.</p>
                     )}
                 </main>
             </div>
